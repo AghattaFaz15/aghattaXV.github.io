@@ -3,7 +3,9 @@
 <head> … estilos … </head>
 <body>
   <div class="container">
-    <h1>🔥 Vaso de Honra – Palavra Profética 🔥</h1>
+    <h1>🔥 O ANIVERSÁRIO É MEU, MAS A FESTA É DELE 
+      
+  ELE QUER FALAR COM VOCÊ 🔥</h1>
     <div class="versiculo" id="versiculo">Carregando unção...</div>
     <iframe style="display:none;" src="https://www.youtube.com/embed/bWUaznyZLd0?autoplay=1&loop=1&playlist=bWUaznyZLd0" allow="autoplay" ></iframe>
     <div class="qr-code">
