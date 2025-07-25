@@ -123,51 +123,12 @@
 </head>
 <body>
   <div class="container">
-    <h1>🔥 Tocha de Jeová – Palavra Profética 🔥</h1>
+    <h1>🔥 O ANIVERSÁRIO É MEU, MAS A FESTA É DELE 🔥</h1>
     <p>Este é um site profético simples, criado para inspirar fé, esperança e unção, trazendo:</p>
     <ul>
       <li>Um hino tocando automaticamente, com unção do Espírito Santo</li>
       <li>Mais de 100 mensagens e versículos proféticos aleatórios</li>
-      <li>QR Code dinâmico para facilitar o compartilhamento</li>
-    </ul>
-
-    <h2>Como usar</h2>
-    <ol>
-      <li>Crie um repositório no GitHub com o nome <code>aghattafaz15.github.io</code> – esse nome ativa o GitHub Pages para publicar seu site.</li>
-      <li>Faça upload do arquivo <code>index.html</code> que está neste pacote.</li>
-      <li>Ative o GitHub Pages em <code>Settings &gt; Pages</code>, selecionando a branch <code>main</code> (ou <code>master</code>) e clique em <em>Save</em>.</li>
-      <li>Aguarde alguns minutos e acesse o site em: <a href="https://aghattafaz15.github.io" target="_blank">https://aghattafaz15.github.io</a></li>
-    </ol>
-
-    <h2>Como funciona</h2>
-    <p>A cada acesso, uma mensagem profética aleatória é mostrada na tela.</p>
-    <p>O hino “Eu Tenho Você (Ao Vivo)” do Marcelo Markes toca em loop, trazendo unção.</p>
-    <p>Um QR Code é gerado automaticamente apontando para o site, facilitando o compartilhamento.</p>
-
-    <h2>Versículo profético para você:</h2>
-    <div class="versiculo" id="versiculo">Carregando unção...</div>
-
-    <iframe src="https://www.youtube.com/embed/bWUaznyZLd0?autoplay=1&loop=1&playlist=bWUaznyZLd0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-    <div class="qr-section">
-      <p>Escaneie e compartilhe esta unção:</p>
-      <img id="qr" src="" alt="QR Code" />
-    </div>
-
-    <h2>Personalizações</h2>
-    <p>Para adicionar mais mensagens proféticas, edite o array <code>versiculos</code> no arquivo <code>index.html</code>.</p>
-    <p>Você pode personalizar estilos, imagens e o hino alterando o embed do YouTube conforme desejar.</p>
-
-    <h2>Compartilhamento</h2>
-    <p>Use o QR Code gerado para divulgar o site na sua igreja, grupos, redes sociais e eventos.</p>
-
-    <h2>Contato</h2>
-    <p>Se precisar de ajuda para modificar ou publicar, pode entrar em contato — estarei orando e pronto para ajudar! 🙌🔥</p>
-
-    <p style="text-align:center; margin-top:3rem; font-weight:bold; font-size:1.2rem;">
-      Que o fogo do Espírito Santo desça e acenda tua vida!<br/>
-      Tocha de Jeová 🕊️🔥
-    </p>
+    
   </div>
 
   <script>
