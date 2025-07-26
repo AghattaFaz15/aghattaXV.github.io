@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aghatta XV - Palavra do Pai</title>
+  <style>
+    body {
+      background: url("imagens/aghatta.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      font-family: 'Georgia', serif;
+      padding: 2rem;
+    }
+    .mensagem {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 2rem auto;
+      font-size: 1.5rem;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mensagem do Pai pra você 💌</h1>
+  <div class="mensagem" id="mensagem">
+    Carregando mensagem...
+  </div>
+  <button onclick="novaMensagem()">Receber outra palavra</button>
+
+  <audio autoplay controls loop>
+    <source src="audio/gabriela-rocha.mp3" type="audio/mp3" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const mensagens = [
+      "Eu sou contigo, diz o Senhor.",
+      "Você não está só — o Pai está te olhando.",
+      "Tudo coopera para o seu bem.",
+      "Ainda que tudo pareça desabar, Eu continuo sendo teu Deus.",
+      "A promessa não morreu, só está no tempo certo.",
+      "Se alegre! Estou restaurando tua esperança.",
+      "Você é filha(o) amada(o) do Pai Celestial.",
+      "Você chegou até aqui porque Eu te sustentei.",
+      "Teus olhos verão o cumprimento das promessas.",
+      "Nada que foi entregue ao Senhor é em vão.",
+      // Adicione mais 90 se quiser
+    ];
+    function novaMensagem() {
+      const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+      document.getElementById("mensagem").innerText = msg;
+    }
+    novaMensagem();
+  </script>
+</body>
+</html>
