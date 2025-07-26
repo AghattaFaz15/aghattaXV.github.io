@@ -176,3 +176,33 @@
   </script>
 </body>
 </html>
+
+<!-- ... (cabeçalho e CSS igual ao anterior) -->
+<body>
+  <div class="mensagem">
+    <h1>📜 Mensagem do Pai pra você</h1>
+    <p class="versiculo" id="versiculo">Carregando palavra profética...</p>
+    <button onclick="tocarAudio()" style="margin-top: 1rem; padding: 10px 20px; background-color: black; color: yellow; font-weight: bold; border: none; border-radius: 8px; cursor: pointer;">
+      🔊 Tocar Louvor Profético
+    </button>
+  </div>
+
+  <audio id="meuAudio" loop>
+    <source src="gabriela-rocha-sonhos.mp3" type="audio/mp3">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const mensagens = [
+      // ... (suas 100 mensagens proféticas como antes)
+    ];
+
+    const sorteio = mensagens[Math.floor(Math.random() * mensagens.length)];
+    document.getElementById("versiculo").textContent = sorteio;
+
+    function tocarAudio() {
+      const audio = document.getElementById("meuAudio");
+      audio.play();
+    }
+  </script>
+</body>
