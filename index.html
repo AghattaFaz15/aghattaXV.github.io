@@ -52,6 +52,35 @@
     <source src="louvor.mp3" type="audio/mp3" />
     Seu navegador não suporta áudio automático.
   </audio>
+  <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Áudio Aleatório - Profetocha</title>
+</head>
+<body>
+  <audio id="player" autoplay></audio>
+
+  <script>
+    // Lista de áudios editáveis
+    const audios = [
+      'audio1.mp3',
+      'audio2.mp3',
+      'audio3.mp3',
+      'audio4.mp3'
+    ];
+
+    // Escolhe um aleatório
+    const audioEscolhido = audios[Math.floor(Math.random() * audios.length)];
+
+    // Define e toca
+    const player = document.getElementById('player');
+    player.src = audioEscolhido;
+    player.play();
+  </script>
+</body>
+</html>
+
 
   <script>
     
