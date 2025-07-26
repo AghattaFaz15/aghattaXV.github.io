@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensagem do Pai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Dancing Script', cursive;
+      color: white;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('imagem.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    #mensagem {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 75%;
+      text-align: center;
+      font-size: 2em;
+      margin-top: 40px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    button {
+      margin-bottom: 20px;
+      padding: 12px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    audio {
+      margin-bottom: 30px;
+      width: 80%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+
+  <button onclick="sortearMensagem()">Nova Palavra</button>
+
+  <audio id="audio" controls>
+    <source src="audio.mp3" type="audio/mp3">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const mensagens = [
+      "O céu te vê mesmo quando ninguém mais enxerga.",
+      "As lágrimas que você derrama hoje serão sementes de alegria amanhã.",
+      "Quando tudo parece silêncio, Deus está escrevendo os capítulos mais lindos.",
+      "Nada está perdido. Deus transforma cinzas em altar.",
+      "A Presença dEle te alcança agora. Respira e sente.",
+      "Você não está atrasado, está sendo alinhado pelo tempo do Céu.",
+      "A tua história não termina em dor. Vai terminar em glória.",
+      "Deus já está no lugar onde você sonha chegar.",
+      "A unção que você carrega quebra jugos — mesmo em silêncio.",
+      "Você é morada do Altíssimo. E Ele não abandona Sua casa.",
+      "Há um mover invisível preparando o teu testemunho visível.",
+      "Você foi chamado, separado e sustentado para um tempo como este.",
+      "A paz que você está buscando já está sendo enviada.",
+      "Deus está trocando o cansaço por renovo agora.",
+      "Enquanto você lê isso, o céu envia resposta.",
+      "Há honra onde houve vergonha. Há cura onde houve dor.",
+      "Você não está esquecid@ — está escondid@ para ser exaltad@.",
+      "A presença de Deus é o que te sustenta — e ela está aqui.",
+      "Ele não erra endereço, nem tempo. Ele está vindo aí.",
+      "Hoje o Espírito Santo toca onde ninguém vê.",
+      "Você é amado de forma eterna e incalculável.",
+      "Não temas. A mão de Deus está estendida sobre você.",
+      "O que Deus preparou pra você é maior que a espera.",
+      "Ele ainda usa as coisas pequenas pra confundir as grandes.",
+      "A paz de Deus está invadindo esse ambiente agora.",
+      "Você é resposta de oração — não dúvida, não rejeição.",
+      "O que te feriu não vai te impedir, vai te impulsionar.",
+      "Deus te separou. E o que é separado, é preservado.",
+      "A promessa ainda está viva — e pulsa dentro de você.",
+      "Você vai viver pra contar: Deus esteve comigo o tempo todo.",
+      "Tudo que é regado com lágrimas, floresce com glória."
+      // Acrescente mais se quiser 100+
+    ];
+
+    function sortearMensagem() {
+      const index = Math.floor(Math.random() * mensagens.length);
+      document.getElementById('mensagem').textContent = mensagens[index];
+    }
+
+    window.onload = () => {
+      sortearMensagem();
+    };
+  </script>
+</body>
+</html>
