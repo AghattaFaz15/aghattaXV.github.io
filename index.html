@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensagem do Pai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('fundo.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .mensagem {
+      background-color: rgba(255,255,255,0.85);
+      color: #111;
+      padding: 20px 30px;
+      border-radius: 20px;
+      max-width: 80%;
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px #fff;
+    }
+    .audio-btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      background: #ffd700;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+    .audio-btn:hover {
+      background-color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="mensagem" id="mensagem">
+      Carregando mensagem profética...
+    </div>
+    <button class="audio-btn" onclick="tocarAudio()">🎵 Ouvir Canção de Simeão</button>
+    <audio id="audio" loop>
+      <source src="audio.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+  </div>
+
+  <script>
+    const mensagens = [
+      "Você não está aqui por acaso. O céu marcou este encontro.",
+      "Há promessas antigas sendo ativadas hoje sobre sua vida.",
+      "O choro da madrugada foi ouvido. A resposta chegou.",
+      "Você está debaixo de uma palavra: 'Nada te faltará'.",
+      "Tua alma será visitada pela paz que excede todo entendimento.",
+      "Hoje, Deus muda a estação. Vem colheita de alegria.",
+      "Você foi lembrado no trono. Os céus se movem por você.",
+      "A esperança renasce agora como fogo em seu peito.",
+      "O que parecia fim é só um novo começo no céu.",
+      "Te chamaram de pequeno, mas o Pai te chamou de Filho.",
+      "A promessa não morreu, apenas estava amadurecendo.",
+      "Hoje, você caminha no favor e não no esforço.",
+      "Você é resposta para uma geração que clama.",
+      "O céu celebra sua vida mais do que você imagina.",
+      "Teu nome está escrito na palma da mão do Altíssimo.",
+      "Os anjos foram enviados pra cumprir decretos sobre ti.",
+      "Enquanto você lê isso, Deus prepara milagres ocultos.",
+      "A dor que você viveu será ponte para outros.",
+      "Tua adoração em silêncio moveu os céus.",
+      "Você foi separado para viver o extraordinário."
+    ];
+
+    function mostrarMensagem() {
+      const random = Math.floor(Math.random() * mensagens.length);
+      document.getElementById("mensagem").innerText = mensagens[random];
+    }
+
+    function tocarAudio() {
+      const audio = document.getElementById('audio');
+      audio.play().catch(err => {
+        console.log('Interação necessária para tocar áudio');
+      });
+    }
+
+    window.onload = mostrarMensagem;
+  </script>
+
+</body>
+</html>
