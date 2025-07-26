@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mensagem do Pai pra Você</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+      background: url('imagem.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mensagem {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px 30px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.3rem;
+      max-width: 90%;
+      color: #111;
+      box-shadow: 0 0 10px #fff;
+      margin-top: 5vh;
+    }
+    .audio-btn {
+      margin-top: 40px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffd700;
+      cursor: pointer;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+    .audio-btn:hover {
+      background-color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mensagem" id="mensagem">
+    Carregando uma palavra do Pai pra você...
+  </div>
+
+  <button class="audio-btn" onclick="tocarAudio()">🎵 Tocar Louvor</button>
+
+  <audio id="audio" loop autoplay muted>
+    <source src="audio.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const mensagens = [
+      "O Espírito Santo sussurra: 'Você não está só'.",
+      "Antes de você nascer, Eu já te amava, diz o Senhor.",
+      "Nada pode separar você do Meu amor.",
+      "Hoje o céu se move por tua causa.",
+      "Você é um milagre que ainda está em construção.",
+      "Eu enxuguei suas lágrimas em silêncio ontem à noite.",
+      "Quando todos se afastaram, Eu permaneci.",
+      "Você não é um erro, você é escolha.",
+      "Não olhe para trás. Eu tenho algo novo pra você.",
+      "Você não precisa ter força, Eu sou sua força.",
+      "Você é mais precioso do que o ouro refinado.",
+      "A sua espera não é castigo, é preparo.",
+      "Seus joelhos dobrados moveram Meu coração.",
+      "Você não está atrasado, está no tempo exato do céu.",
+      "Você não precisa se provar, Eu já te aprovei.",
+      "Você é uma carta viva que Eu escrevi com lágrimas.",
+      "Você foi tocado antes mesmo de tocar no ventre.",
+      "A promessa não morreu, apenas dormiu.",
+      "Hoje o céu te cobre com paz que excede entendimento.",
+      "Você é resposta de oração que alguém ainda nem sabe.",
+      "Você é forte porque foi moldado no fogo.",
+      "Você é a semente que o inferno não conseguiu sufocar.",
+      "Você é mais do que suas dores passadas.",
+      "A vergonha será trocada por honra dobrada.",
+      "Você não está sozinho nessa caminhada.",
+      "Eu te formei com propósito eterno.",
+      "A tua fé pequena ainda move montanhas.",
+      "O deserto que te cansa é o lugar onde Eu te visito.",
+      "Mesmo sem força, sua adoração chegou até o Trono.",
+      "Você é uma ponte entre gerações.",
+      "A canção que você canta em meio à dor é um perfume pra Mim.",
+      "Você vai ser resposta onde houver caos.",
+      "Mesmo em silêncio, Eu ainda sou Deus sobre tua vida.",
+      "Você vai viver aquilo que orou chorando.",
+      "Hoje Eu renovo teu coração cansado.",
+      "Você não será envergonhado, Eu jurei por Mim mesmo.",
+      "A dor vai virar testemunho.",
+      "Fica em paz. Eu estou no controle.",
+      "Você foi feito pra voar, não pra se prender ao chão.",
+      "Você carrega uma unção que muda ambientes.",
+      "Você é bênção e não peso.",
+      "Você está debaixo de um novo decreto.",
+      "Eu nunca cansei de você.",
+      "Você é a luz que ilumina onde pisar.",
+      "A promessa está viva — e é real!",
+      "Tua fragilidade me atrai, diz o Senhor.",
+      "Nada que você entregou a Mim será perdido.",
+      "A tua obediência no secreto fez barulho no céu.",
+      "Você não nasceu por acidente, nasceu com missão.",
+      "Você ainda vai entender o porquê de cada detalhe.",
+      "Você é mais do que o mundo disse.",
+      "Você é Meu, e isso basta."
+      // Acrescente mais aqui até as 100 se quiser.
+    ];
+
+    function mostrarMensagem() {
+      const random = Math.floor(Math.random() * mensagens.length);
+      document.getElementById("mensagem").innerText = mensagens[random];
+    }
+
+    function tocarAudio() {
+      const audio = document.getElementById("audio");
+      audio.muted = false;
+      audio.play().catch(() => {
+        alert("Toque permitido pelo usuário necessário. Clique no botão para liberar o som.");
+      });
+    }
+
+    window.onload = function () {
+      mostrarMensagem();
+      tocarAudio();
+    };
+  </script>
+
+</body>
+</html>
