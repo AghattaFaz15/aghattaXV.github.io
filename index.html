@@ -51,22 +51,31 @@
       background-color: rgba(255, 255, 255, 0.4);
     }
 
-    audio {
-      width: 80%;
-      max-width: 400px;
-      outline: none;
+<button id="btnTocarAudio">Tocar Áudio</button>
+
+<audio id="audioPlayer" loop>
+  <source src="audio.mp3" type="audio/mpeg" />
+  Seu navegador não suporta o elemento de áudio.
+</audio>
+
+<script>
+  const btnAudio = document.getElementById('btnTocarAudio');
+  const audio = document.getElementById('audioPlayer');
+
+  btnAudio.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play().then(() => {
+        btnAudio.textContent = "Pausar Áudio";
+      }).catch(err => {
+        console.warn("Navegador bloqueou o autoplay:", err);
+      });
+    } else {
+      audio.pause();
+      btnAudio.textContent = "Tocar Áudio";
     }
-  </style>
-</head>
-<body>
-  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+  });
+</script>
 
-  <button id="btnAudio">Tocar / Pausar Áudio</button>
-
-  <audio id="audioPlayer" loop>
-    <source src="audio.mp3" type="audio/mpeg" />
-    Seu navegador não suporta áudio.
-  </audio>
 
   <script>
     const mensagens = [
