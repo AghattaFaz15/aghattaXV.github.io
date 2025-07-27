@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mensagem do Pai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Dancing Script', cursive;
+      color: gold;
+      background: url('imagem.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #mensagem {
+      margin-top: 110px;
+      font-size: 1.5em;
+      max-width: 70%;
+      padding: 20px;
+      text-shadow: 0 0 8px gold, 0 0 15px goldenrod;
+    }
+
+    .botoes {
+      margin-top: 80px;
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+
+  <div class="botoes">
+    <button id="btnNovaMensagem">Nova Palavra</button>
+    <button id="btnTocarAudio">Tocar Hino</button>
+  </div>
+
+  <audio id="audioPlayer" loop></audio>
+
+  <script>
+    const mensagens = [
+      "Você foi escolhido antes da fundação do mundo.",
+      "O céu te sustenta quando tudo falha.",
+      "Deus está escrevendo um recomeço pra você.",
+      // ... (continue com todas as 100 profecias)
+      "Você é a casa preferida do Espírito Santo."
+    ];
+
+    const audios = [
+      "audio1.mp3",
+      "audio2.mp3",
+      "audio3.mp3"
+      // Adicione mais arquivos aqui
+    ];
+
+    function sortearMensagem() {
+      const indexMsg = Math.floor(Math.random() * mensagens.length);
+      document.getElementById('mensagem').textContent = mensagens[indexMsg];
+    }
+
+    function tocarAudioAleatorio() {
+      const indexAudio = Math.floor(Math.random() * audios.length);
+      const audio = document.getElementById('audioPlayer');
+      audio.src = audios[indexAudio];
+      audio.play().catch(err => {
+        console.warn("Clique necessário para tocar o áudio:", err);
+      });
+    }
+
+    document.getElementById('btnNovaMensagem').addEventListener('click', sortearMensagem);
+    document.getElementById('btnTocarAudio').addEventListener('click', tocarAudioAleatorio);
+
+    window.onload = () => {
+      sortearMensagem();
+    };
+  </script>
+</body>
+</html>
