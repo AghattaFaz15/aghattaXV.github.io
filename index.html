@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mensagem do Pai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Dancing Script', cursive;
+      color: gold;
+      background: url('imagem.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #mensagem {
+      margin-top: 380px;
+      font-size: 1.5em;
+      max-width: 70%;
+      padding: 20px;
+      text-shadow: 0 0 8px gold, 0 0 15px goldenrod;
+    }
+
+    .botoes {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      padding: 14px 35px;
+      font-size: 1.2em;
+      border: 2px solid gold;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: gold;
+      text-shadow: 0 0 5px gold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    audio {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      #mensagem {
+        font-size: 1.3em;
+        margin-top: 150px;
+      }
+      .botoes {
+        flex-direction: column;
+        margin-top: 60px;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+
+  <div class="botoes">
+    <button id="btnNovaMensagem">📜 Nova Palavra</button>
+    <button id="btnTocarAudio">🎵 Tocar Hino</button>
+  </div>
+
+  <audio id="audioPlayer">
+    <source src="" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <script>
+    const mensagens = [
+       "Você foi escolhido antes da fundação do mundo.",
+      "O céu te sustenta quando tudo falha.",
+      "Deus está escrevendo um recomeço pra você.",
+      "A unção te precede antes de você chegar.",
+      "Ele não se esqueceu — Ele está agindo em silêncio.",
+      "Enquanto você espera, Deus trabalha.",
+      "Você não perdeu tempo, ganhou experiência.",
+      "As portas que Deus abre, ninguém fecha.",
+      "Você é uma promessa em movimento.",
+      "O céu tem pressa pra te ver avançar.",
+      "Nada poderá impedir o agir de Deus.",
+      "A tua lágrima é linguagem para o céu.",
+      "Hoje começa um novo ciclo de honra.",
+      "Você é resposta pra gerações futuras.",
+      "A dor vai passar, mas o propósito vai ficar.",
+      "O que está sendo gerado no secreto será celebrado em público.",
+      "A palavra de Deus sobre você é irrevogável.",
+      "Mesmo no deserto, há maná vindo do céu.",
+      "Se prepare: o céu está prestes a surpreender.",
+      "Você está no radar de Deus.",
+      "As mãos do Oleiro estão moldando tua história.",
+      "Ele está restaurando o que parecia perdido.",
+      "Você é precioso demais para ser esquecido.",
+      "Deus está quebrando ciclos e abrindo caminhos.",
+      "A tua fé está chamando o céu pra agir.",
+      "Você carrega uma promessa viva.",
+      "O céu não trabalha com coincidência, e sim com propósito.",
+      "Hoje o Espírito Santo visita tua casa.",
+      "Você é filho amado, não órfão do destino.",
+      "O tempo da espera não será em vão.",
+      "Há cura descendo sobre teu interior.",
+      "Você não será envergonhado.",
+      "A tua oração moveu o invisível.",
+      "O fardo está sendo trocado por paz agora.",
+      "Você nasceu para influenciar e transformar.",
+      "A graça te basta, e ela está aqui.",
+      "O Senhor te cerca por todos os lados.",
+      "Você vai florescer onde tentaram te enterrar.",
+      "Deus é especialista em reviravoltas.",
+      "Você tem raiz no céu, não vai cair com o vento.",
+      "A presença dEle te renova agora.",
+      "Você é portador de luz, mesmo em ambientes sombrios.",
+      "A voz de Deus será mais alta que tuas dúvidas.",
+      "O que foi perdido será restituído com glória.",
+      "Você é amado além do que entende.",
+      "Não temas — tua história está nas mãos do Criador.",
+      "A glória da segunda casa será maior que a primeira.",
+      "Teu silêncio está sendo traduzido pelo Espírito.",
+      "Há vitória sendo preparada em silêncio.",
+      "Você não está só — há anjos em missão.",
+      "A palavra liberada não volta vazia.",
+      "Você é resposta e não coincidência.",
+      "Você vai testemunhar algo sobrenatural.",
+      "Deus está fortalecendo teu espírito agora.",
+      "O impossível está sendo moldado nos bastidores.",
+      "A tua obediência abre portais espirituais.",
+      "O céu te observa com carinho e zelo.",
+      "Você carrega a presença onde pisa.",
+      "A promessa de Deus sobreviveu à tempestade.",
+      "Você é herdeiro de bênçãos incontáveis.",
+      "Nada vai impedir o mover que Deus iniciou.",
+      "Você está sob um tempo de aceleração.",
+      "Deus está limpando o caminho pra tua vitória.",
+      "A semente que você plantou com dor vai florescer em honra.",
+      "Hoje o céu está enviando provisão inesperada.",
+      "Você foi separado para impactar o mundo.",
+      "A paz vai morar onde antes havia guerra.",
+      "O céu canta sobre você enquanto dorme.",
+      "Você vai entender o porquê de cada espera.",
+      "A justiça de Deus está vindo como resposta.",
+      "Você foi marcado pelo Espírito para um tempo específico.",
+      "A tua fé está provocando o mover divino.",
+      "O céu está assinando decretos ao teu favor.",
+      "Você vai sorrir onde antes chorou.",
+      "Deus está trocando vergonha por honra.",
+      "A espera termina quando o céu decide.",
+      "Você é canal de bênção em tua geração.",
+      "O Espírito está intercedendo por você com gemidos profundos.",
+      "Nada é pequeno quando Deus está no meio.",
+      "O que parecia fim é só um novo começo.",
+      "Há um propósito até no silêncio de Deus.",
+      "O céu está trabalhando onde você não vê.",
+      "Você vai prosperar mesmo em terras secas.",
+      "A bênção está batendo na tua porta.",
+      "O tempo de cantar chegou.",
+      "Você está sendo levantado como referência.",
+      "A tua dor não é em vão — é semente de glória.",
+      "Deus está removendo pesos invisíveis.",
+      "Você vai subir onde disseram que você cairia.",
+      "O que Deus faz é eterno.",
+      "A voz do Pai está te chamando de volta pra perto.",
+      "A presença dEle vale mais que mil conquistas.",
+      "Você está sendo alinhado com o Céu.",
+      "A fé que você tem é suficiente pra mover montanhas.",
+      "Deus não erra — o tempo dEle é perfeito.",
+      "Você vai viver pra contar milagres.",
+      "A tua adoração abre os céus.",
+      "Mesmo sem força, você está vencendo.",
+      "O que foi prometido, vai se cumprir.",
+      "O vento do Espírito está soprando novidade.",
+      "Você é a casa preferida do Espírito Santo."
+
+    ];
+
+    const audios = [
+      "audio1.mp3",
+      "audio2.mp3",
+      "audio3.mp3",
+      "audio4.mp3",
+      "audio5.mp3",
+      "audio6.mp3",
+      "audio7.mp3",
+      "audio8.mp3"
+    ];
+
+    function sortearMensagem() {
+      const indexMsg = Math.floor(Math.random() * mensagens.length);
+      document.getElementById('mensagem').textContent = mensagens[indexMsg];
+    }
+
+    function tocarAudioAleatorio() {
+      const indexAudio = Math.floor(Math.random() * audios.length);
+      const audio = document.getElementById('audioPlayer');
+      audio.src = audios[indexAudio];
+      audio.load(); // forçar recarregar
+      audio.play().catch(err => {
+        console.warn("Clique necessário para tocar o áudio:", err);
+      });
+    }
+
+    document.getElementById('btnNovaMensagem').addEventListener('click', sortearMensagem);
+    document.getElementById('btnTocarAudio').addEventListener('click', tocarAudioAleatorio);
+
+    window.onload = () => {
+      sortearMensagem();
+    };
+  </script>
+</body>
+</html>
