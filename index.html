@@ -23,7 +23,7 @@
     }
 
     #mensagem {
-      margin-top: 380px;
+      margin-top: 100px;
       font-size: 1.5em;
       max-width: 70%;
       padding: 20px;
@@ -31,7 +31,7 @@
     }
 
     .botoes {
-      margin-top: 100px;
+      margin-top: 300px;
       display: flex;
       flex-direction: row;
       gap: 30px;
@@ -90,8 +90,156 @@
 
   <script>
     const mensagens = [
-      // As 200 mensagens proféticas que você já inseriu — mantém sem repetir aqui
-      // ...
+      "Você foi escolhido antes da fundação do mundo.",
+      "O céu te sustenta quando tudo falha.",
+      "Deus está escrevendo um recomeço pra você.",
+      "A unção te precede antes de você chegar.",
+      "Ele não se esqueceu — Ele está agindo em silêncio.",
+      "Enquanto você espera, Deus trabalha.",
+      "Você não perdeu tempo, ganhou experiência.",
+      "As portas que Deus abre, ninguém fecha.",
+      "Você é uma promessa em movimento.",
+      "O céu tem pressa pra te ver avançar.",
+      "Nada poderá impedir o agir de Deus.",
+      "A tua lágrima é linguagem para o céu.",
+      "Hoje começa um novo ciclo de honra.",
+      "Você é resposta pra gerações futuras.",
+      "A dor vai passar, mas o propósito vai ficar.",
+      "O que está sendo gerado no secreto será celebrado em público.",
+      "A palavra de Deus sobre você é irrevogável.",
+      "Mesmo no deserto, há maná vindo do céu.",
+      "Se prepare: o céu está prestes a surpreender.",
+      "Você está no radar de Deus.",
+      "As mãos do Oleiro estão moldando tua história.",
+      "Ele está restaurando o que parecia perdido.",
+      "Você é precioso demais para ser esquecido.",
+      "Deus está quebrando ciclos e abrindo caminhos.",
+      "A tua fé está chamando o céu pra agir.",
+      "Você carrega uma promessa viva.",
+      "O céu não trabalha com coincidência, e sim com propósito.",
+      "Hoje o Espírito Santo visita tua casa.",
+      "Você é filho amado, não órfão do destino.",
+      "O tempo da espera não será em vão.",
+      "Há cura descendo sobre teu interior.",
+      "Você não será envergonhado.",
+      "A tua oração moveu o invisível.",
+      "O fardo está sendo trocado por paz agora.",
+      "Você nasceu para influenciar e transformar.",
+      "A graça te basta, e ela está aqui.",
+      "O Senhor te cerca por todos os lados.",
+      "Você vai florescer onde tentaram te enterrar.",
+      "Deus é especialista em reviravoltas.",
+      "Você tem raiz no céu, não vai cair com o vento.",
+      "A presença dEle te renova agora.",
+      "Você é portador de luz, mesmo em ambientes sombrios.",
+      "A voz de Deus será mais alta que tuas dúvidas.",
+      "O que foi perdido será restituído com glória.",
+      "Você é amado além do que entende.",
+      "Não temas — tua história está nas mãos do Criador.",
+      "A glória da segunda casa será maior que a primeira.",
+      "Teu silêncio está sendo traduzido pelo Espírito.",
+      "Há vitória sendo preparada em silêncio.",
+      "Você não está só — há anjos em missão.",
+      "A palavra liberada não volta vazia.",
+      "Você é resposta e não coincidência.",
+      "Você vai testemunhar algo sobrenatural.",
+      "Deus está fortalecendo teu espírito agora.",
+      "O impossível está sendo moldado nos bastidores.",
+      "A tua obediência abre portais espirituais.",
+      "O céu te observa com carinho e zelo.",
+      "Você carrega a presença onde pisa.",
+      "A promessa de Deus sobreviveu à tempestade.",
+      "Você é herdeiro de bênçãos incontáveis.",
+      "Nada vai impedir o mover que Deus iniciou.",
+      "Você está sob um tempo de aceleração.",
+      "Deus está limpando o caminho pra tua vitória.",
+      "A semente que você plantou com dor vai florescer em honra.",
+      "Hoje o céu está enviando provisão inesperada.",
+      "Você foi separado para impactar o mundo.",
+      "A paz vai morar onde antes havia guerra.",
+      "O céu canta sobre você enquanto dorme.",
+      "Você vai entender o porquê de cada espera.",
+      "A justiça de Deus está vindo como resposta.",
+      "Você foi marcado pelo Espírito para um tempo específico.",
+      "A tua fé está provocando o mover divino.",
+      "O céu está assinando decretos ao teu favor.",
+      "Você vai sorrir onde antes chorou.",
+      "Deus está trocando vergonha por honra.",
+      "A espera termina quando o céu decide.",
+      "Você é canal de bênção em tua geração.",
+      "O Espírito está intercedendo por você com gemidos profundos.",
+      "Nada é pequeno quando Deus está no meio.",
+      "O que parecia fim é só um novo começo.",
+      "Há um propósito até no silêncio de Deus.",
+      "O céu está trabalhando onde você não vê.",
+      "Você vai prosperar mesmo em terras secas.",
+      "A bênção está batendo na tua porta.",
+      "O tempo de cantar chegou.",
+      "Você está sendo levantado como referência.",
+      "A tua dor não é em vão — é semente de glória.",
+      "Deus está removendo pesos invisíveis.",
+      "Você vai subir onde disseram que você cairia.",
+      "O que Deus faz é eterno.",
+      "A voz do Pai está te chamando de volta pra perto.",
+      "A presença dEle vale mais que mil conquistas.",
+      "Você está sendo alinhado com o Céu.",
+      "A fé que você tem é suficiente pra mover montanhas.",
+      "Deus não erra — o tempo dEle é perfeito.",
+      "Você vai viver pra contar milagres.",
+      "A tua adoração abre os céus.",
+      "Mesmo sem força, você está vencendo.",
+      "O que foi prometido, vai se cumprir.",
+      "O vento do Espírito está soprando novidade.",
+      "Você é a casa preferida do Espírito Santo.",
+      "O tempo da restauração chegou.",
+      "O que Deus prometeu, Ele mesmo vai sustentar.",
+      "Você está cercado por misericórdias.",
+      "Há renovo vindo ao teu coração.",
+      "Você está entrando numa nova estação de vitória.",
+      "A mão de Deus está movendo situações por você.",
+      "Você não está esquecido, está escondido para ser revelado.",
+      "A colheita será maior que a dor da semente.",
+      "Deus está alinhando o que parecia confuso.",
+      "A tua fé será recompensada em público.",
+      "A resposta está mais perto do que você imagina.",
+      "Deus já enviou o socorro.",
+      "Você está vivendo dias proféticos.",
+      "O que é teu ninguém toma, porque foi o Pai quem deu.",
+      "O favor de Deus vai abrir portas que ninguém imaginava.",
+      "Você vai ser lembrado onde antes foi esquecido.",
+      "Toda lágrima será honrada.",
+      "O Espírito Santo está te fortalecendo agora.",
+      "Não pare — a promessa está viva.",
+      "Você está protegido mesmo na tempestade.",
+      "Deus está limpando teu nome e tua história.",
+      "Você nasceu pra marcar esta geração.",
+      "O céu te chama de escolhido.",
+      "Você é templo da glória, não abrigo da dor.",
+      "O Senhor está colocando tudo no lugar.",
+      "Você está caminhando rumo ao extraordinário.",
+      "Nada do que foi feito contra você vai prosperar.",
+      "Você é precioso como o ouro refinado.",
+      "A tua alma está sendo curada enquanto lê essa palavra.",
+      "Há promessas que estão prestes a se manifestar.",
+      "Você é filho amado do Deus que não falha.",
+      "Seu clamor está no trono do Altíssimo.",
+      "Você está sendo cercado de livramentos.",
+      "A guerra termina quando Deus entra.",
+      "Seu espírito está sendo renovado agora.",
+      "Você vai ver o milagre onde não via solução.",
+      "Os céus estão trabalhando por ti.",
+      "A vitória será grande porque grande foi a prova.",
+      "Deus está te entregando mais do que pediu.",
+      "Você vai receber a resposta com honra.",
+      "A tua casa será visitada com paz.",
+      "Deus está dando ordem aos anjos ao teu favor.",
+      "Você é amado com amor eterno.",
+      "Ele está abrindo caminhos invisíveis.",
+      "Você está vencendo mesmo sem perceber.",
+      "O mover de Deus está ativo sobre tua vida.",
+      "Há nova unção sendo derramada sobre ti.",
+      "Deus está reescrevendo tua história com glória.",
+      "Você é guardado pelo Deus que nunca dorme."
     ];
 
     const audios = [
@@ -114,7 +262,7 @@
       const indexAudio = Math.floor(Math.random() * audios.length);
       const audio = document.getElementById('audioPlayer');
       audio.src = audios[indexAudio];
-      audio.load(); // forçar recarregar
+      audio.load(); 
       audio.play().catch(err => {
         console.warn("Clique necessário para tocar o áudio:", err);
       });
