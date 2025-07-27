@@ -32,7 +32,7 @@
       max-width: 70%;
       font-size: 1.3em;
       box-shadow: none;
-      margin-top: 105px; /* desce a mensagem */
+      margin-top: 110px; /* desce a mensagem */
       margin-bottom: 40px;
     }
 
@@ -48,26 +48,23 @@
       margin-bottom: 30px;
     }
 
-    button:hover {
+    button:id="btnPlay">Tocar Áudio</button>
       background-color: rgba(255, 255, 255, 0.4);
     }
 
-    audio {
-      display: none; /* oculta o player */
-    }
-  </style>
-</head>
-<body>
-  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+    <audio id="audioPlayer" loop>
+  <source src="audio.mp3" type="audio/mpeg" />
+</audio>
 
-  <button id="btnNovaPalavra">Nova Palavra</button>
-
-  <audio id="audioPlayer" loop>
-    <source src="audio.mp3" type="audio/mpeg" />
-    Seu navegador não suporta áudio.
-  </audio>
-
-  <script>
+<script>
+  document.getElementById('btnPlay').addEventListener('click', () => {
+    const audio = document.getElementById('audioPlayer');
+    audio.play().catch(err => {
+      alert("Clique necessário para liberar o som.");
+      console.log(err);
+    });
+  });
+</script>
     const mensagens = [
       "O céu te vê mesmo quando ninguém mais enxerga.",
       "As lágrimas que você derrama hoje serão sementes de alegria amanhã.",
