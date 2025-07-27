@@ -67,6 +67,24 @@
     <source src="audio.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const audio = document.getElementById("audioPlayer");
+
+    // Tenta tocar o áudio assim que possível
+    function tentarTocar() {
+      audio.play().catch(() => {
+        // Se não tocar, espera o clique do usuário
+        document.body.addEventListener("click", () => {
+          audio.play();
+        }, { once: true });
+      });
+    }
+
+    tentarTocar();
+  });
+</script>
+
 
   <script>
     const mensagens = [
