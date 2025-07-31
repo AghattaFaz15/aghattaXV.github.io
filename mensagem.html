@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mensagens do Céu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Dancing Script', cursive;
+      color: #d4af37;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+    }
+    #mensagem {
+      max-width: 90%;
+      padding: 40px 50px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4em;
+      line-height: 1.4em;
+      color: #ffd700cc;
+      background: linear-gradient(135deg, #001f4dcc, #003399cc);
+      border-radius: 40px 40px 40px 0;
+      box-shadow:
+        0 0 30px #ffd700aa,
+        inset 0 0 25px #ffff88aa;
+      text-shadow:
+        1px 1px 5px #222a44cc,
+        0 0 8px #ffd700ee;
+      position: relative;
+    }
+    #mensagem::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      left: 40px;
+      width: 0;
+      height: 0;
+      border-top: 30px solid #003399cc;
+      border-left: 30px solid transparent;
+      filter: drop-shadow(0 0 5px #001f4dcc);
+    }
+  </style>
+</head>
+<body>
+  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+
+  <script>
+    const mensagens = [
+      "Você foi escolhido antes da fundação do mundo.",
+      "O céu te sustenta quando tudo falha.",
+      "Deus está escrevendo um recomeço pra você.",
+      "A unção te precede antes de você chegar.",
+      "Ele não se esqueceu — Ele está agindo em silêncio.",
+      "Você é a casa preferida do Espírito Santo.",
+      "A esperança não morreu, ela só está amadurecendo.",
+      "Teu clamor alcançou o Trono hoje.",
+      "Os céus estão conspirando a teu favor.",
+      "A colheita vem com abundância celestial.",
+      // ... (restante omitido para brevidade, copie do seu array original)
+      "Você foi ungido para destravar destinos com tua fé."
+    ];
+
+    function sortearMensagem() {
+      const indexMsg = Math.floor(Math.random() * mensagens.length);
+      document.getElementById('mensagem').textContent = mensagens[indexMsg];
+    }
+
+    window.sortearMensagem = sortearMensagem;
+
+    window.onload = () => {
+      sortearMensagem();
+    };
+  </script>
+</body>
+</html>
