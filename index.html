@@ -1,110 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Aghatta XV - Hinos & Versículos</title>
+  <meta charset="UTF-8" />
+  <title>Página Principal - Aghatta XV</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: url('imagem.jpg') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Georgia', cursive;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
-      overflow: hidden;
-      color: #ffd700;
     }
 
-    .botao-container {
+    .container {
+      text-align: center;
+    }
+
+    .button-container {
       display: flex;
+      justify-content: center;
       gap: 40px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
-    .botao {
+    .btn {
       position: relative;
-      padding: 18px 30px;
+      padding: 20px 40px;
       font-size: 24px;
-      background: linear-gradient(145deg, #1e3c72, #2a5298);
-      color: white;
-      border: none;
-      border-radius: 50px;
+      font-family: 'Lucida Calligraphy', cursive;
+      color: #fff;
+      border: 2px solid gold;
+      background: linear-gradient(45deg, #0077cc, #00ccff);
+      border-radius: 40px;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-      font-family: 'Great Vibes', cursive;
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 20px gold;
+      transition: all 0.4s ease-in-out;
     }
 
-    .botao:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ffd700;
     }
 
-    .icone {
+    .btn img.icon {
       position: absolute;
+      top: -30px;
+      right: -30px;
       width: 40px;
-      height: 40px;
       pointer-events: none;
+      transition: all 1s ease;
     }
 
-    .icone.borboleta {
-      top: -20px;
-      left: -20px;
-      animation: baterAsa 2s infinite;
+    .btn.audio .icon {
+      transform: rotate(-20deg);
     }
 
-    .icone.coroa {
-      top: -20px;
-      right: -20px;
-      animation: pulsarCoroa 2s infinite;
+    .btn.mensagem .icon {
+      transform: rotate(20deg);
     }
 
-    @keyframes baterAsa {
-      0%, 100% { transform: rotate(-5deg) translateY(0); }
-      50% { transform: rotate(5deg) translateY(-5px); }
+    .fly {
+      animation: flyAway 2s forwards;
     }
 
-    @keyframes pulsarCoroa {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
+    .grow {
+      animation: growFade 2s forwards;
+    }
+
+    @keyframes flyAway {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(-20deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-200px, -200px) rotate(-120deg);
+      }
+    }
+
+    @keyframes growFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(3);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="botao-container">
-    <button class="botao" onclick="animar('borboleta')">
-      <img src="borboleta.png" class="icone borboleta" id="iconeBorboleta">
-      Hino
-    </button>
-
-    <button class="botao" onclick="animar('coroa')">
-      <img src="coroa.png" class="icone coroa" id="iconeCoroa">
-      Versículo
-    </button>
+  <div class="container">
+    <div class="button-container">
+      <div class="btn audio" onclick="flyIcon(this, 'borboleta')">
+        Hino
+        <img src="borboleta.png" class="icon borboleta" />
+        <a href="audio.html" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;"></a>
+      </div>
+      <div class="btn mensagem" onclick="growIcon(this, 'coroa')">
+        Palavra
+        <img src="coroa.png" class="icon coroa" />
+        <a href="mensagem.html" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;"></a>
+      </div>
+    </div>
   </div>
 
   <script>
-    function animar(tipo) {
-      const icone = tipo === 'borboleta' ? document.getElementById('iconeBorboleta') : document.getElementById('iconeCoroa');
-      if (tipo === 'borboleta') {
-        icone.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
-        icone.style.opacity = 0;
-        icone.style.transform = 'translateY(-100px)';
-        setTimeout(() => {
-          icone.style.opacity = 1;
-          icone.style.transform = 'translateY(0)';
-        }, 2000);
-      } else {
-        icone.style.transition = 'transform 1.2s ease';
-        icone.style.transform = 'scale(1.6)';
-        setTimeout(() => {
-          icone.style.transform = 'scale(1)';
-        }, 1500);
-      }
+    function flyIcon(btn, className) {
+      const icon = btn.querySelector('.' + className);
+      icon.classList.add('fly');
+      setTimeout(() => {
+        window.location.href = "audio.html";
+      }, 1000);
+    }
+
+    function growIcon(btn, className) {
+      const icon = btn.querySelector('.' + className);
+      icon.classList.add('grow');
+      setTimeout(() => {
+        window.location.href = "mensagem.html";
+      }, 1000);
     }
   </script>
 </body>
