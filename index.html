@@ -2,197 +2,284 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Mensagem do Pai - Tocha do Altíssimo</title>
+  <title>Mensagem do Pai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet" />
+  
+  <!-- Fonte cursiva especial -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet" />
+  
   <style>
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Dancing Script', cursive;
+    /* Fundo lindo que lembra festa de 15 anos */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Great Vibes', cursive;
       background: url('imagem.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #d4af37;
+      color: #D4AF37; /* dourado */
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
       text-align: center;
-      user-select: none;
+      overflow-x: hidden;
     }
 
-    /* Container balão e botões */
-    #container {
-      max-width: 700px;
-      width: 90%;
-      margin-top: 120px;
+    /* Mensagem em balão elegante */
+    #mensagem {
+      max-width: 70%;
+      font-size: 2em;
+      background: rgba(0, 0, 80, 0.6);
+      border-radius: 30px;
+      padding: 40px 50px;
+      box-shadow:
+        0 0 10px #FFD700,
+        0 0 30px #1E90FF inset,
+        0 0 20px #FFD700 inset;
+      color: #FFD700;
+      text-shadow: 2px 2px 6px #003366;
+      margin-top: 100px;
+      position: relative;
+      font-weight: 600;
+      line-height: 1.4;
+      font-family: 'Playfair Display', serif;
+      transition: all 0.4s ease;
     }
 
-    /* Botões estilos */
+    /* Balão "seta" abaixo */
+    #mensagem::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 30px 25px 0 25px;
+      border-style: solid;
+      border-color: rgba(0, 0, 80, 0.6) transparent transparent transparent;
+      filter: drop-shadow(0 0 5px #1E90FF);
+    }
+
+    /* Container dos botões */
     .botoes {
-      margin-top: 50px;
+      margin-top: 40px;
       display: flex;
       gap: 40px;
       flex-wrap: wrap;
       justify-content: center;
+      align-items: center;
     }
 
+    /* Botões vibrantes dourado e azul */
     button {
       position: relative;
-      flex: 1 1 160px;
-      padding: 15px 25px;
+      padding: 14px 28px 14px 48px;
+      font-size: 1.4em;
       font-family: 'Great Vibes', cursive;
-      font-size: 1.5em;
-      border: 3px solid transparent;
-      border-radius: 20px;
+      font-weight: 700;
+      border: 3px solid #D4AF37;
+      border-radius: 50px;
       cursor: pointer;
+      color: #FFD700;
+      background: linear-gradient(135deg, #003366, #1E90FF);
       box-shadow:
-        0 0 15px #d4af37bb,
-        inset 0 0 12px #ffe066cc;
-      color: #ffe066;
-      text-shadow: 0 0 10px #ffd700cc;
-      transition:
-        background-color 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.3s ease;
+        0 0 15px #FFD700,
+        0 0 10px #1E90FF inset;
+      text-shadow: 1px 1px 4px #000080;
+      transition: all 0.3s ease;
       overflow: visible;
-      background: linear-gradient(135deg, #1d2b52, #3b5998);
+      user-select: none;
     }
-    #btnNovaMensagem {
-      background: linear-gradient(135deg, #1d2b52, #3b5998);
-      border-color: #4f6cb3;
-      color: #cbd9ff;
+    button:hover {
+      background: linear-gradient(135deg, #1E90FF, #FFD700);
+      color: #003366;
       box-shadow:
-        0 0 15px #4f6cb3bb,
-        inset 0 0 15px #7a9dffcc;
-    }
-    #btnTocarAudio {
-      background: linear-gradient(135deg, #d4af37, #ffd700);
-      border-color: #c9a733;
-      color: #4b3b00;
-      box-shadow:
-        0 0 20px #ffd700cc,
-        inset 0 0 20px #fff966cc;
-    }
-    #btnNovaMensagem:hover {
-      background: linear-gradient(135deg, #4f6cb3, #7a9dff);
-      box-shadow:
-        0 0 25px #7a9dffcc,
-        inset 0 0 20px #b5c9ffcc;
+        0 0 25px #FFD700,
+        0 0 20px #1E90FF inset;
       transform: scale(1.07);
-      color: #e4eaff;
-    }
-    #btnTocarAudio:hover {
-      background: linear-gradient(135deg, #ffd700, #fff966);
-      box-shadow:
-        0 0 30px #fff966dd,
-        inset 0 0 30px #ffffaacc;
-      transform: scale(1.07);
-      color: #4b3b00;
+      text-shadow: 2px 2px 8px #000;
     }
 
-    /* Ícones nos botões */
-    #btnNovaMensagem::before {
-      content: "👑";
+    /* Espaço para os ícones animados */
+    .icone-animado {
       position: absolute;
-      top: 8px;
-      right: 8px;
-      font-size: 2.8em;
-      color: #ffd700cc;
-      text-shadow: 0 0 8px #ffd700aa;
-      animation: pulsarCoroa 2.5s ease-in-out infinite;
+      width: 40px;
+      height: 40px;
+      opacity: 0;
       pointer-events: none;
       user-select: none;
-      filter: drop-shadow(0 0 4px #ffd700cc);
-      transform-origin: center;
+      transition: opacity 0.5s ease;
+      z-index: 10;
     }
-    #btnTocarAudio::before {
-      content: "🦋";
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      font-size: 2.8em;
-      color: #3399ffcc;
-      text-shadow: 0 0 6px #3399ffaa;
-      animation: baterAsa 2.5s ease-in-out infinite;
-      pointer-events: none;
-      user-select: none;
-      filter: drop-shadow(0 0 6px #3399ffcc);
+
+    /* Borboleta no canto superior esquerdo do botão de hino */
+    #borboleta {
+      top: 6px;
+      left: 6px;
       transform-origin: center;
     }
 
-    @keyframes pulsarCoroa {
-      0%, 100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 4px #ffd700cc);
+    /* Coroa no canto superior direito do botão da mensagem */
+    #coroa {
+      top: 6px;
+      right: 6px;
+      transform-origin: center;
+    }
+
+    /* Animação borboleta batendo asa e sumindo */
+    @keyframes borboletaVoa {
+      0% {
         opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
       }
       50% {
-        transform: scale(1.15);
-        filter: drop-shadow(0 0 12px #ffff88cc);
-        opacity: 0.9;
+        opacity: 0.8;
+        transform: translate(15px, -20px) scale(1.1) rotate(15deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(30px, -40px) scale(0.8) rotate(-10deg);
       }
     }
 
-    @keyframes baterAsa {
-      0%, 100% {
-        transform: rotate(0deg) scale(1);
-        opacity: 1;
-      }
-      25% {
-        transform: rotate(5deg) scale(1.05);
-        opacity: 0.95;
+    /* Animação coroa pulsando e sumindo */
+    @keyframes coroaCresce {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
       }
       50% {
-        transform: rotate(0deg) scale(1.1);
         opacity: 1;
+        transform: scale(1.3);
       }
-      75% {
-        transform: rotate(-5deg) scale(1.05);
-        opacity: 0.95;
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
       }
     }
 
+    /* Classes para ativar animação */
+    .animar-borboleta {
+      animation: borboletaVoa 1.5s forwards;
+      opacity: 1 !important;
+    }
+    .animar-coroa {
+      animation: coroaCresce 1.5s forwards;
+      opacity: 1 !important;
+    }
+
+    /* Responsividade elegante */
+    @media (max-width: 768px) {
+      #mensagem {
+        font-size: 1.5em;
+        max-width: 85%;
+        padding: 30px 35px;
+      }
+      button {
+        font-size: 1.2em;
+        padding: 12px 25px 12px 45px;
+      }
+      .icone-animado {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    @media (max-width: 400px) {
+      #mensagem {
+        font-size: 1.3em;
+        max-width: 90%;
+        padding: 25px 25px;
+      }
+      button {
+        font-size: 1em;
+        padding: 10px 20px 10px 40px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="container">
-    <!-- Mensagens carregadas via iframe -->
-    <iframe id="iframeMensagens" src="mensagens.html" title="Mensagens do Céu" 
-      style="border:none; width:100%; height:230px; background:transparent;" scrolling="no" loading="lazy"></iframe>
+  <div id="mensagem">Carregando uma Palavra do Céu...</div>
 
-    <!-- Botões -->
-    <div class="botoes">
-      <button id="btnNovaMensagem" title="Nova Palavra do Céu">Nova Palavra</button>
-      <button id="btnTocarAudio" title="Tocar Hino Celestial">Tocar Hino</button>
-    </div>
+  <div class="botoes">
+    <button id="btnNovaMensagem">
+      📜 Nova Palavra
+      <img src="coroa.png" alt="Coroa" id="coroa" class="icone-animado" />
+    </button>
+
+    <button id="btnTocarAudio">
+      🎵 Tocar Hino
+      <img src="borboleta.png" alt="Borboleta" id="borboleta" class="icone-animado" />
+    </button>
   </div>
 
-  <!-- iframe do áudio invisível -->
-  <iframe id="iframeAudio" src="audio.html" style="display:none;"></iframe>
+  <audio id="audioPlayer" preload="auto">
+    <source id="audioSource" src="" type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
 
   <script>
-    const iframeMensagens = document.getElementById('iframeMensagens');
-    const iframeAudio = document.getElementById('iframeAudio');
+    // Mensagens inspiradoras
+    const mensagens = [
+      "Você foi escolhido antes da fundação do mundo.",
+      "O céu te sustenta quando tudo falha.",
+      "Deus está escrevendo um recomeço pra você.",
+      "A unção te precede antes de você chegar.",
+      "Ele não se esqueceu — Ele está agindo em silêncio.",
+      "Você é a casa preferida do Espírito Santo.",
+      "A esperança não morreu, ela só está amadurecendo.",
+      "Teu clamor alcançou o Trono hoje.",
+      "Os céus estão conspirando a teu favor.",
+      "A colheita vem com abundância celestial."
+      // ... (adicione mais mensagens conforme desejar)
+    ];
 
-    // Envia mensagem para iframe mensagens para sortear
-    function pedirNovaMensagem() {
-      iframeMensagens.contentWindow.sortearMensagem();
+    // Audios (coloque seus arquivos na mesma pasta)
+    const audios = [
+      "audio1.mp3",
+      "audio2.mp3",
+      "audio3.mp3"
+    ];
+
+    function sortearMensagem() {
+      const indexMsg = Math.floor(Math.random() * mensagens.length);
+      document.getElementById('mensagem').textContent = mensagens[indexMsg];
     }
 
-    // Envia mensagem para iframe audio para tocar
-    function tocarAudio() {
-      iframeAudio.contentWindow.tocarAudioAleatorio();
+    function tocarAudioAleatorio() {
+      const indexAudio = Math.floor(Math.random() * audios.length);
+      const audio = document.getElementById('audioPlayer');
+      audio.src = audios[indexAudio];
+      audio.load();
+      audio.play().catch(err => {
+        console.warn("Clique necessário para tocar o áudio:", err);
+      });
     }
 
-    document.getElementById('btnNovaMensagem').addEventListener('click', () => {
-      pedirNovaMensagem();
+    // Animar os ícones no clique
+    const btnNovaMensagem = document.getElementById('btnNovaMensagem');
+    const btnTocarAudio = document.getElementById('btnTocarAudio');
+    const coroa = document.getElementById('coroa');
+    const borboleta = document.getElementById('borboleta');
+
+    btnNovaMensagem.addEventListener('click', () => {
+      sortearMensagem();
+      coroa.classList.remove('animar-coroa');
+      void coroa.offsetWidth; // reset animation
+      coroa.classList.add('animar-coroa');
     });
 
-    document.getElementById('btnTocarAudio').addEventListener('click', () => {
-      tocarAudio();
+    btnTocarAudio.addEventListener('click', () => {
+      tocarAudioAleatorio();
+      borboleta.classList.remove('animar-borboleta');
+      void borboleta.offsetWidth; // reset animation
+      borboleta.classList.add('animar-borboleta');
     });
+
+    // Sorteio inicial na carga da página
+    window.onload = () => {
+      sortearMensagem();
+    };
   </script>
 </body>
 </html>
