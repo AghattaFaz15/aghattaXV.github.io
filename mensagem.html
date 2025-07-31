@@ -14,6 +14,8 @@
       height: 100vh;
       padding: 30px;
       text-align: center;
+      margin: 0;
+      user-select: none;
     }
 
     #mensagemContainer {
@@ -24,22 +26,11 @@
       max-width: 600px;
       font-size: 1.3em;
       line-height: 1.6em;
-    }
-
-    #novaMensagemBtn {
-      margin-top: 30px;
-      padding: 12px 28px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 10px;
-      background-color: #7c69a4;
-      color: white;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    #novaMensagemBtn:hover {
-      background-color: #5e4a91;
+      user-select: text;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -47,8 +38,6 @@
   <div id="mensagemContainer">
     Toque em "Mensagem de Deus" para receber uma palavra divina.
   </div>
-
-  <button id="novaMensagemBtn">Mensagem de Deus</button>
 
   <script>
     const mensagens = [
@@ -62,20 +51,26 @@
       "As promessas que Eu te fiz não têm data de validade — confia.",
       "Hoje, o que parece confuso será luz amanhã. Persevera.",
       "Você ainda vai agradecer pelo que hoje dói — Eu sou especialista em redimir lágrimas.",
-      // ... Aqui entram mais mensagens ...
+      // (adicione as suas mensagens divinas e pessoais aqui ou carregue via index.html)
     ];
 
-    // Gera mensagens até completar 365 (pode ser automatizado com IA ou você adiciona manualmente abaixo)
+    // Preenche para 365 mensagens, caso falte
     while (mensagens.length < 365) {
       mensagens.push("Esta é uma mensagem personalizada número " + mensagens.length + ". Deus vê, Deus ama, Deus age.");
     }
 
     const mensagemContainer = document.getElementById("mensagemContainer");
-    const btn = document.getElementById("novaMensagemBtn");
 
-    btn.addEventListener("click", () => {
+    function mostrarNovaMensagem() {
       const index = Math.floor(Math.random() * mensagens.length);
-      mensagemContainer.innerHTML = mensagens[index];
+      mensagemContainer.textContent = mensagens[index];
+    }
+
+    // Escuta comando do pai (index.html)
+    window.addEventListener('message', event => {
+      if (event.data === 'novaMensagem') {
+        mostrarNovaMensagem();
+      }
     });
   </script>
 </body>
