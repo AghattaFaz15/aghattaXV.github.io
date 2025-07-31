@@ -1,20 +1,45 @@
-<audio id="audioHino" autoplay></audio>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audio dos Hinos</title>
+</head>
+<body>
+  <audio id="audioHino" autoplay></audio>
 
-<script>
-  const hinos = [
-    'hinos/audio1.mp3',
-    'hinos/audio2.mp3',
-    'hinos/audio3.mp3',
-    'hinos/audio4.mp3',
-    'hinos/audio5.mp3',
-    'hinos/audio6.mp3',
-    'hinos/audio7.mp3',
-    'hinos/audio8.mp3'
-  ];
+  <script>
+    const hinos = [
+      'hinos/audio1.mp3',
+      'hinos/audio2.mp3',
+      'hinos/audio3.mp3',
+      'hinos/audio4.mp3',
+      'hinos/audio5.mp3',
+      'hinos/audio6.mp3',
+      'hinos/audio7.mp3',
+      'hinos/audio8.mp3'
+    ];
 
-  const audioElement = document.getElementById("audioHino");
-  const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
+    const audioElement = document.getElementById("audioHino");
 
-  audioElement.src = hinoAleatorio;
-  audioElement.play();
-</script>
+    // Função para tocar um hino aleatório
+    function tocarHinoAleatorio() {
+      const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
+      audioElement.src = hinoAleatorio;
+      audioElement.play().catch(() => {
+        // Pode ser necessário interação do usuário em alguns browsers
+        console.log("Clique necessário para ativar o áudio.");
+      });
+    }
+
+    // Escuta mensagens do pai (index.html)
+    window.addEventListener('message', event => {
+      if (event.data === 'tocarAudio') {
+        tocarHinoAleatorio();
+      }
+    });
+
+    // Opcional: tocar um hino automaticamente na carga da página
+    // tocarHinoAleatorio();
+  </script>
+</body>
+</html>
