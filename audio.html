@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Áudio dos Hinos</title>
-</head>
-<body style="background: transparent; margin:0; padding:0; user-select:none;">
-
-<audio id="audioHino"></audio>
+<audio id="audioHino" autoplay></audio>
 
 <script>
   const hinos = [
@@ -22,21 +14,26 @@
 
   const audioElement = document.getElementById("audioHino");
 
-  // Avisar ao index que o audio está pronto para receber comandos
-  window.parent.postMessage({ type: 'audioPronto' }, '*');
+  // Função para tocar áudio aleatório
+  function tocarAudioAleatorio() {
+    const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
+    audioElement.src = hinoAleatorio;
+    audioElement.play().catch(err => {
+      // Caso o navegador impeça autoplay
+      window.parent.postMessage({type: 'erroAudio'}, '*');
+    });
+  }
 
+  // Tocar na inicialização, se desejar:
+  // tocarAudioAleatorio();
+
+  // Avisar que o audio está pronto para receber comandos
+  window.parent.postMessage({type: 'audioPronto'}, '*');
+
+  // Escutar mensagens do index.html para tocar áudio
   window.addEventListener('message', event => {
     if(event.data.type === 'tocarAudio') {
-      // Escolhe um hino aleatório
-      const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
-      audioElement.src = hinoAleatorio;
-      audioElement.play().catch(() => {
-        // Caso algum problema no play
-        window.parent.postMessage({ type: 'erroAudio' }, '*');
-      });
+      tocarAudioAleatorio();
     }
   });
 </script>
-
-</body>
-</html>
