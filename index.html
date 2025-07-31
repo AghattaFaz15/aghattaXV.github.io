@@ -2,132 +2,241 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aghatta XV - Portal Celestial</title>
+  <title>Tocha do Altíssimo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@1,700&display=swap');
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Great Vibes', cursive;
+    html, body {
+      margin: 0; padding: 0; height: 100%;
       background: url('imagem.jpg') no-repeat center center fixed;
       background-size: cover;
+      font-family: 'Dancing Script', cursive;
+      color: gold;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 100vh;
-      color: #fff;
-    }
-
-    .container {
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 20px;
+      overflow: hidden;
+      user-select: none;
     }
 
-    .buttons {
+    #mensagem-container {
+      flex: 1;
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      position: relative;
-      background: linear-gradient(to right, #1e3c72, #2a5298);
-      border: none;
-      color: white;
-      padding: 20px 40px;
-      font-size: 24px;
-      font-family: 'Playfair Display', serif;
-      border-radius: 40px;
-      cursor: pointer;
-      box-shadow: 0 0 20px #ffd700;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #ffd700, 0 0 40px #87cefa;
-    }
-
-    .icon {
-      position: absolute;
-      width: 40px;
-      transition: all 2s ease;
-    }
-
-    .borboleta {
-      top: -20px;
-      left: -20px;
-    }
-
-    .coroa {
-      top: -25px;
-      right: -25px;
-    }
-
-    @keyframes voo {
-      0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
-      50% { transform: translate(-80px, -120px) rotate(20deg) scale(1.2); opacity: 0.7; }
-      100% { transform: translate(150px, -200px) rotate(-15deg) scale(0.3); opacity: 0; }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .voar {
-      animation: voo 3s forwards;
-    }
-
-    .pulsar {
-      animation: pulse 3s forwards;
+      align-items: center;
+      max-width: 70vw;
+      margin: 20px auto 10px;
+      font-size: 1.5rem;
+      color: #ffd700;
+      text-shadow: 0 0 8px #b8860b, 0 0 15px #daa520;
+      min-height: 120px;
+      user-select: text;
     }
 
     iframe {
       border: none;
       width: 100%;
       height: 100%;
-      flex-grow: 1;
+      display: none;
+    }
+
+    /* Botões fixados na base, lado a lado */
+    #botoes {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 40px;
+      z-index: 1000;
+    }
+
+    button {
+      position: relative;
+      background: linear-gradient(135deg, #004aad, #2a75bb);
+      border: 3px solid gold;
+      border-radius: 15px;
+      padding: 14px 32px 14px 60px;
+      font-size: 1.3rem;
+      color: gold;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: visible;
+      user-select: none;
+    }
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 223, 77, 1);
+    }
+
+    /* Ícones maiores, na quina do botão */
+    .icon {
+      position: absolute;
+      top: -20px;
+      width: 48px;
+      height: 48px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #btnHinos .icon {
+      left: 10px;
+      animation: pulseCrown 3s infinite ease-in-out;
+      transform-origin: center center;
+      z-index: 10;
+    }
+
+    #btnMensagens .icon {
+      left: 10px;
+      animation: flyButterfly 4s infinite ease-in-out;
+      transform-origin: center center;
+      z-index: 10;
+    }
+
+    @keyframes pulseCrown {
+      0%, 100% { transform: scale(1) rotate(-15deg); opacity: 1; }
+      50% { transform: scale(1.3) rotate(-15deg); opacity: 0.7; }
+    }
+
+    @keyframes flyButterfly {
+      0%, 100% { transform: rotate(15deg); opacity: 1; }
+      50% { transform: rotate(-15deg); opacity: 0.6; }
+    }
+
+    /* Borboletas voando - container fixo */
+    #borboletas-fly {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 70px;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 999;
+    }
+
+    .borboleta-fade {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      opacity: 0;
+      animation-fill-mode: forwards;
+      background: url('borboleta.png') no-repeat center center;
+      background-size: contain;
+      will-change: transform, opacity;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <iframe id="conteudo" src="audio.html"></iframe>
+
+  <div id="mensagem-container">
+    <!-- Aqui aparecerá o texto do iframe mensagem.html -->
   </div>
 
-  <div class="buttons">
-    <button class="btn" onclick="tocar('audio.html', 'borboleta')">
-      <img src="borboleta.png" class="icon borboleta" id="borboleta">
+  <div id="borboletas-fly"></div>
+
+  <div id="botoes">
+    <button id="btnHinos" title="Tocar Hino">
+      <img src="coroa.png" alt="Coroa" class="icon" />
       Hinos
     </button>
-    <button class="btn" onclick="tocar('mensagem.html', 'coroa')">
-      <img src="coroa.png" class="icon coroa" id="coroa">
+    <button id="btnMensagens" title="Mensagem de Deus">
+      <img src="borboleta.png" alt="Borboleta" class="icon" />
       Mensagem de Deus
     </button>
   </div>
 
+  <iframe id="iframeMensagem" src="mensagem.html"></iframe>
+  <iframe id="iframeAudio" src="audio.html"></iframe>
+
   <script>
-    function tocar(pagina, tipo) {
-      document.getElementById('conteudo').src = pagina;
+    const btnHinos = document.getElementById('btnHinos');
+    const btnMensagens = document.getElementById('btnMensagens');
+    const mensagemContainer = document.getElementById('mensagem-container');
+    const iframeMensagem = document.getElementById('iframeMensagem');
+    const iframeAudio = document.getElementById('iframeAudio');
+    const borboletasFly = document.getElementById('borboletas-fly');
 
-      const el = document.getElementById(tipo);
-      el.classList.remove('voar', 'pulsar');
+    // Inicial: carregar mensagem.html invisível (mas vamos pegar o conteúdo)
+    iframeMensagem.style.display = 'none';
+    iframeAudio.style.display = 'none';
 
-      void el.offsetWidth; // força reinício da animação
+    // Função para mostrar texto da mensagem.html no container central
+    function carregarMensagem() {
+      // Pedimos conteúdo do iframe mensagem.html (via postMessage ou simples fetch)
+      // Como a mensagem.html está local, fetch é mais simples e seguro
+      fetch('mensagem.html')
+        .then(res => res.text())
+        .then(html => {
+          // Extrair só o texto da mensagem (assumindo #mensagem no mensagem.html)
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const msg = doc.getElementById('mensagem');
+          mensagemContainer.textContent = msg ? msg.textContent.trim() : 'Mensagem não encontrada.';
+        });
+    }
 
-      if (tipo === 'borboleta') {
-        el.classList.add('voar');
-        setTimeout(() => el.classList.remove('voar'), 3000);
-      } else if (tipo === 'coroa') {
-        el.classList.add('pulsar');
-        setTimeout(() => el.classList.remove('pulsar'), 3000);
+    carregarMensagem(); // Carregar ao iniciar
+
+    // Botão Mensagem: atualiza a mensagem no container, não troca iframe visível
+    btnMensagens.addEventListener('click', () => {
+      carregarMensagem();
+      animarBorboletas();
+    });
+
+    // Botão Hinos: toca audio aleatório do iframe audio.html, sem sumir mensagem
+    btnHinos.addEventListener('click', () => {
+      iframeAudio.contentWindow.postMessage('tocarAudio', '*');
+      animarCoroa();
+    });
+
+    // Borboletas animadas: 15 borboletas voando aleatoriamente e sumindo
+    function animarBorboletas() {
+      const total = 15;
+      for (let i = 0; i < total; i++) {
+        const borboleta = document.createElement('div');
+        borboleta.className = 'borboleta-fade';
+        borboleta.style.top = `${Math.random() * window.innerHeight * 0.7}px`;
+        borboleta.style.left = `${Math.random() * window.innerWidth}px`;
+        borboleta.style.animation = `voarBorboleta 5s ease forwards`;
+        borboletasFly.appendChild(borboleta);
+        setTimeout(() => borboleta.remove(), 5000);
       }
     }
+
+    // Coroa pulsando
+    function animarCoroa() {
+      const coroa = btnHinos.querySelector('.icon');
+      coroa.style.animation = 'pulseCrownLong 5s ease forwards';
+      setTimeout(() => {
+        coroa.style.animation = 'pulseCrown 3s infinite ease-in-out';
+      }, 5000);
+    }
+
+    // Animations adicionais
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+      @keyframes voarBorboleta {
+        0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(1); }
+        20% { opacity: 1; }
+        100% { opacity: 0; transform: translate(100px, -150px) rotate(360deg) scale(0.5); }
+      }
+      @keyframes pulseCrownLong {
+        0% { transform: scale(1) rotate(-15deg); opacity: 1; }
+        50% { transform: scale(1.5) rotate(-15deg); opacity: 0.7; }
+        100% { transform: scale(1) rotate(-15deg); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Escuta mensagens do iframe audio.html para logar erros
+    window.addEventListener('message', e => {
+      if(e.data === 'erroAudio') {
+        alert('Erro ao tentar tocar o áudio. Por favor, clique no botão para permitir o som.');
+      }
+    });
   </script>
+
 </body>
 </html>
