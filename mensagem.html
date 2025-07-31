@@ -2,79 +2,81 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Mensagens do Céu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <title>Mensagens de Deus</title>
   <style>
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      font-family: 'Dancing Script', cursive;
-      color: #d4af37;
-      background: transparent;
+    body {
+      background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+      font-family: 'Georgia', serif;
+      color: #3b2f63;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      padding: 30px;
       text-align: center;
-      user-select: none;
     }
-    #mensagem {
-      max-width: 90%;
-      padding: 40px 50px;
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.4em;
-      line-height: 1.4em;
-      color: #ffd700cc;
-      background: linear-gradient(135deg, #001f4dcc, #003399cc);
-      border-radius: 40px 40px 40px 0;
-      box-shadow:
-        0 0 30px #ffd700aa,
-        inset 0 0 25px #ffff88aa;
-      text-shadow:
-        1px 1px 5px #222a44cc,
-        0 0 8px #ffd700ee;
-      position: relative;
+
+    #mensagemContainer {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      font-size: 1.3em;
+      line-height: 1.6em;
     }
-    #mensagem::after {
-      content: "";
-      position: absolute;
-      bottom: -30px;
-      left: 40px;
-      width: 0;
-      height: 0;
-      border-top: 30px solid #003399cc;
-      border-left: 30px solid transparent;
-      filter: drop-shadow(0 0 5px #001f4dcc);
+
+    #novaMensagemBtn {
+      margin-top: 30px;
+      padding: 12px 28px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #7c69a4;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #novaMensagemBtn:hover {
+      background-color: #5e4a91;
     }
   </style>
 </head>
 <body>
-  <div id="mensagem">Carregando uma Palavra do Céu...</div>
+  <div id="mensagemContainer">
+    Toque em "Mensagem de Deus" para receber uma palavra divina.
+  </div>
+
+  <button id="novaMensagemBtn">Mensagem de Deus</button>
 
   <script>
     const mensagens = [
-      "Você foi escolhido antes da fundação do mundo.",
-      "O céu te sustenta quando tudo falha.",
-      "Deus está escrevendo um recomeço pra você.",
-      "A unção te precede antes de você chegar.",
-      "Ele não se esqueceu — Ele está agindo em silêncio.",
-      "Você é a casa preferida do Espírito Santo.",
-      "A esperança não morreu, ela só está amadurecendo.",
-      "Teu clamor alcançou o Trono hoje.",
-      "Os céus estão conspirando a teu favor.",
-      "A colheita vem com abundância celestial.",
-      // ... (restante omitido para brevidade, copie do seu array original)
-      "Você foi ungido para destravar destinos com tua fé."
+      "Eu te conheço pelo nome, e mesmo quando tudo silencia, Eu continuo falando ao teu coração.",
+      "Não temas o amanhã, pois Eu já estou lá, preparando caminhos onde não há trilhas.",
+      "Quando você se sente esquecido, é quando mais Eu te observo com amor eterno.",
+      "A tua lágrima não caiu em vão — ela regou o milagre que Eu estou fazendo crescer em silêncio.",
+      "Mesmo quando o mundo não entende tua dor, Eu compreendo cada detalhe da tua alma.",
+      "Você não foi escolhido por engano — você é resposta de oração antiga.",
+      "Eu te coloquei nesse tempo por um motivo eterno. Nada é por acaso.",
+      "As promessas que Eu te fiz não têm data de validade — confia.",
+      "Hoje, o que parece confuso será luz amanhã. Persevera.",
+      "Você ainda vai agradecer pelo que hoje dói — Eu sou especialista em redimir lágrimas.",
+      // ... Aqui entram mais mensagens ...
     ];
 
-    function sortearMensagem() {
-      const indexMsg = Math.floor(Math.random() * mensagens.length);
-      document.getElementById('mensagem').textContent = mensagens[indexMsg];
+    // Gera mensagens até completar 365 (pode ser automatizado com IA ou você adiciona manualmente abaixo)
+    while (mensagens.length < 365) {
+      mensagens.push("Esta é uma mensagem personalizada número " + mensagens.length + ". Deus vê, Deus ama, Deus age.");
     }
 
-    window.sortearMensagem = sortearMensagem;
+    const mensagemContainer = document.getElementById("mensagemContainer");
+    const btn = document.getElementById("novaMensagemBtn");
 
-    window.onload = () => {
-      sortearMensagem();
-    };
+    btn.addEventListener("click", () => {
+      const index = Math.floor(Math.random() * mensagens.length);
+      mensagemContainer.innerHTML = mensagens[index];
+    });
   </script>
 </body>
 </html>
