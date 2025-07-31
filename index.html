@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mensagem do Pai - Tocha do Altíssimo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Dancing Script', cursive;
+      background: url('imagem.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #d4af37;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Container balão e botões */
+    #container {
+      max-width: 700px;
+      width: 90%;
+      margin-top: 120px;
+    }
+
+    /* Botões estilos */
+    .botoes {
+      margin-top: 50px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      position: relative;
+      flex: 1 1 160px;
+      padding: 15px 25px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5em;
+      border: 3px solid transparent;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow:
+        0 0 15px #d4af37bb,
+        inset 0 0 12px #ffe066cc;
+      color: #ffe066;
+      text-shadow: 0 0 10px #ffd700cc;
+      transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+      overflow: visible;
+      background: linear-gradient(135deg, #1d2b52, #3b5998);
+    }
+    #btnNovaMensagem {
+      background: linear-gradient(135deg, #1d2b52, #3b5998);
+      border-color: #4f6cb3;
+      color: #cbd9ff;
+      box-shadow:
+        0 0 15px #4f6cb3bb,
+        inset 0 0 15px #7a9dffcc;
+    }
+    #btnTocarAudio {
+      background: linear-gradient(135deg, #d4af37, #ffd700);
+      border-color: #c9a733;
+      color: #4b3b00;
+      box-shadow:
+        0 0 20px #ffd700cc,
+        inset 0 0 20px #fff966cc;
+    }
+    #btnNovaMensagem:hover {
+      background: linear-gradient(135deg, #4f6cb3, #7a9dff);
+      box-shadow:
+        0 0 25px #7a9dffcc,
+        inset 0 0 20px #b5c9ffcc;
+      transform: scale(1.07);
+      color: #e4eaff;
+    }
+    #btnTocarAudio:hover {
+      background: linear-gradient(135deg, #ffd700, #fff966);
+      box-shadow:
+        0 0 30px #fff966dd,
+        inset 0 0 30px #ffffaacc;
+      transform: scale(1.07);
+      color: #4b3b00;
+    }
+
+    /* Ícones nos botões */
+    #btnNovaMensagem::before {
+      content: "👑";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 2.8em;
+      color: #ffd700cc;
+      text-shadow: 0 0 8px #ffd700aa;
+      animation: pulsarCoroa 2.5s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 0 4px #ffd700cc);
+      transform-origin: center;
+    }
+    #btnTocarAudio::before {
+      content: "🦋";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 2.8em;
+      color: #3399ffcc;
+      text-shadow: 0 0 6px #3399ffaa;
+      animation: baterAsa 2.5s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 0 6px #3399ffcc);
+      transform-origin: center;
+    }
+
+    @keyframes pulsarCoroa {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px #ffd700cc);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 12px #ffff88cc);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes baterAsa {
+      0%, 100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      25% {
+        transform: rotate(5deg) scale(1.05);
+        opacity: 0.95;
+      }
+      50% {
+        transform: rotate(0deg) scale(1.1);
+        opacity: 1;
+      }
+      75% {
+        transform: rotate(-5deg) scale(1.05);
+        opacity: 0.95;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <!-- Mensagens carregadas via iframe -->
+    <iframe id="iframeMensagens" src="mensagens.html" title="Mensagens do Céu" 
+      style="border:none; width:100%; height:230px; background:transparent;" scrolling="no" loading="lazy"></iframe>
+
+    <!-- Botões -->
+    <div class="botoes">
+      <button id="btnNovaMensagem" title="Nova Palavra do Céu">Nova Palavra</button>
+      <button id="btnTocarAudio" title="Tocar Hino Celestial">Tocar Hino</button>
+    </div>
+  </div>
+
+  <!-- iframe do áudio invisível -->
+  <iframe id="iframeAudio" src="audio.html" style="display:none;"></iframe>
+
+  <script>
+    const iframeMensagens = document.getElementById('iframeMensagens');
+    const iframeAudio = document.getElementById('iframeAudio');
+
+    // Envia mensagem para iframe mensagens para sortear
+    function pedirNovaMensagem() {
+      iframeMensagens.contentWindow.sortearMensagem();
+    }
+
+    // Envia mensagem para iframe audio para tocar
+    function tocarAudio() {
+      iframeAudio.contentWindow.tocarAudioAleatorio();
+    }
+
+    document.getElementById('btnNovaMensagem').addEventListener('click', () => {
+      pedirNovaMensagem();
+    });
+
+    document.getElementById('btnTocarAudio').addEventListener('click', () => {
+      tocarAudio();
+    });
+  </script>
+</body>
+</html>
