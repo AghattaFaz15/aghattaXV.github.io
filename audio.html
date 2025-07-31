@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audio Player</title>
+</head>
+<body style="display:none;">
+  <audio id="audioPlayer" preload="auto" aria-hidden="true">
+    <source id="audioSource" src="" type="audio/mpeg" />
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <script>
+    const audios = [
+      "audio1.mp3",
+      "audio2.mp3",
+      "audio3.mp3",
+      "audio4.mp3",
+      "audio5.mp3",
+      "audio6.mp3",
+      "audio7.mp3",
+      "audio8.mp3"
+    ];
+
+    // Função para tocar áudio aleatório, acessível via mensagem
+    function tocarAudioAleatorio() {
+      const indexAudio = Math.floor(Math.random() * audios.length);
+      const audio = document.getElementById('audioPlayer');
+      audio.src = audios[indexAudio];
+      audio.load();
+      audio.play().catch(err => {
+        console.warn("Clique necessário para tocar o áudio:", err);
+      });
+    }
+
+    // Expor função para window (fora do iframe)
+    window.tocarAudioAleatorio = tocarAudioAleatorio;
+  </script>
+</body>
+</html>
