@@ -39,7 +39,7 @@
       border: none;
       width: 100%;
       height: 100%;
-      display: none;
+      display: none; /* invisível, só para usar postMessage */
     }
 
     /* Botões fixados na base, lado a lado */
@@ -132,6 +132,7 @@
 
   <div id="mensagem-container">
     <!-- Aqui aparecerá o texto do iframe mensagem.html -->
+    Carregando mensagem divina...
   </div>
 
   <div id="borboletas-fly"></div>
@@ -147,8 +148,9 @@
     </button>
   </div>
 
-  <iframe id="iframeMensagem" src="mensagem.html"></iframe>
-  <iframe id="iframeAudio" src="audio.html"></iframe>
+  <!-- iframes escondidos para controle de áudio e mensagens -->
+  <iframe id="iframeMensagem" src="mensagem.html" sandbox="allow-scripts"></iframe>
+  <iframe id="iframeAudio" src="audio.html" sandbox="allow-scripts"></iframe>
 
   <script>
     const btnHinos = document.getElementById('btnHinos');
@@ -158,37 +160,32 @@
     const iframeAudio = document.getElementById('iframeAudio');
     const borboletasFly = document.getElementById('borboletas-fly');
 
-    // Inicial: carregar mensagem.html invisível (mas vamos pegar o conteúdo)
-    iframeMensagem.style.display = 'none';
-    iframeAudio.style.display = 'none';
-
-    // Função para mostrar texto da mensagem.html no container central
+    // Função para buscar e mostrar a mensagem atual do iframe mensagem.html
     function carregarMensagem() {
-      // Pedimos conteúdo do iframe mensagem.html (via postMessage ou simples fetch)
-      // Como a mensagem.html está local, fetch é mais simples e seguro
-      fetch('mensagem.html')
-        .then(res => res.text())
-        .then(html => {
-          // Extrair só o texto da mensagem (assumindo #mensagem no mensagem.html)
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-          const msg = doc.getElementById('mensagem');
-          mensagemContainer.textContent = msg ? msg.textContent.trim() : 'Mensagem não encontrada.';
-        });
+      // Comunicação via postMessage
+      iframeMensagem.contentWindow.postMessage('pedirMensagem', '*');
     }
 
-    carregarMensagem(); // Carregar ao iniciar
-
-    // Botão Mensagem: atualiza a mensagem no container, não troca iframe visível
+    // Botão Mensagens: pede nova mensagem e anima borboletas
     btnMensagens.addEventListener('click', () => {
       carregarMensagem();
       animarBorboletas();
     });
 
-    // Botão Hinos: toca audio aleatório do iframe audio.html, sem sumir mensagem
+    // Botão Hinos: envia comando para o iframe audio.html tocar áudio aleatório e anima coroa
     btnHinos.addEventListener('click', () => {
       iframeAudio.contentWindow.postMessage('tocarAudio', '*');
       animarCoroa();
+    });
+
+    // Ouve mensagens do iframe mensagem.html com a mensagem divina
+    window.addEventListener('message', (event) => {
+      if(event.data.tipo === 'mensagemDivina' && event.source === iframeMensagem.contentWindow) {
+        mensagemContainer.textContent = event.data.texto;
+      }
+      if(event.data === 'erroAudio') {
+        alert('Erro ao tentar tocar o áudio. Clique no botão para permitir o som.');
+      }
     });
 
     // Borboletas animadas: 15 borboletas voando aleatoriamente e sumindo
@@ -197,9 +194,10 @@
       for (let i = 0; i < total; i++) {
         const borboleta = document.createElement('div');
         borboleta.className = 'borboleta-fade';
-        borboleta.style.top = `${Math.random() * window.innerHeight * 0.7}px`;
-        borboleta.style.left = `${Math.random() * window.innerWidth}px`;
+        borboleta.style.top = `${window.innerHeight - 80}px`;
+        borboleta.style.left = `${btnMensagens.getBoundingClientRect().left + 20}px`;
         borboleta.style.animation = `voarBorboleta 5s ease forwards`;
+        borboleta.style.animationDelay = `${Math.random() * 0.5}s`;
         borboletasFly.appendChild(borboleta);
         setTimeout(() => borboleta.remove(), 5000);
       }
@@ -214,7 +212,7 @@
       }, 5000);
     }
 
-    // Animations adicionais
+    // Animações extras
     const styleSheet = document.createElement('style');
     styleSheet.textContent = `
       @keyframes voarBorboleta {
@@ -230,12 +228,8 @@
     `;
     document.head.appendChild(styleSheet);
 
-    // Escuta mensagens do iframe audio.html para logar erros
-    window.addEventListener('message', e => {
-      if(e.data === 'erroAudio') {
-        alert('Erro ao tentar tocar o áudio. Por favor, clique no botão para permitir o som.');
-      }
-    });
+    // Carregar mensagem inicial
+    carregarMensagem();
   </script>
 
 </body>
