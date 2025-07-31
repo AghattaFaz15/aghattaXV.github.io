@@ -1,136 +1,139 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Página Celestial</title>
+  <meta charset="UTF-8">
+  <title>Aghatta - Palavras e Hinos</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Great Vibes', cursive;
-      background: url('imagem.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
+      padding: 0;
+      font-family: 'Georgia', cursive;
+      background: url('imagem.jpg') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       height: 100vh;
+      color: #fff;
     }
 
-    .btn-container {
+    #conteudo {
+      flex: 1;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 40px auto;
+      width: 90%;
+      max-width: 800px;
+      overflow-y: auto;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .botao-container {
       display: flex;
       justify-content: center;
-      margin-top: 40px;
-      gap: 40px;
+      gap: 30px;
+      padding: 20px;
     }
 
-    .button {
+    .botao {
       position: relative;
-      background: linear-gradient(135deg, #002366, #00BFFF);
+      padding: 16px 40px;
+      font-size: 20px;
+      font-family: 'Georgia', cursive;
+      background: linear-gradient(45deg, #002b80, #ffd700);
+      color: white;
       border: none;
-      padding: 20px 40px;
       border-radius: 50px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #fff;
-      box-shadow: 0 0 20px gold;
+      box-shadow: 0 0 15px #ffd700;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .button:hover {
+    .botao:hover {
       transform: scale(1.1);
-      box-shadow: 0 0 30px #ffd700;
+      box-shadow: 0 0 25px #ffd700;
     }
 
     .icon {
       position: absolute;
+      top: -30px;
+      right: -30px;
       width: 40px;
-      height: 40px;
-      top: -25px;
-      right: -25px;
-      transition: transform 1s ease, opacity 1s ease;
+      transition: transform 0.8s ease, opacity 1s ease;
     }
 
-    .fly-away {
-      animation: fly 2s forwards;
+    .voar {
+      animation: voar 1s forwards;
     }
 
-    .pulse {
-      animation: pulse 1s forwards;
+    .ampliar {
+      animation: ampliar 0.8s forwards;
     }
 
-    @keyframes fly {
-      to {
-        transform: translate(100px, -100px) rotate(360deg) scale(1.5);
-        opacity: 0;
-      }
+    @keyframes voar {
+      0% { transform: translate(0, 0); opacity: 1; }
+      100% { transform: translate(100px, -100px); opacity: 0; }
     }
 
-    @keyframes pulse {
+    @keyframes ampliar {
       0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(1); opacity: 0; }
+      100% { transform: scale(1.8); opacity: 0; }
     }
 
     iframe {
-      width: 90%;
-      height: 65vh;
-      margin-top: 40px;
-      border: 4px solid gold;
+      width: 100%;
+      height: 100%;
+      border: none;
       border-radius: 20px;
-      background: rgba(255,255,255,0.8);
     }
 
     @media (max-width: 600px) {
-      .button {
-        font-size: 20px;
-        padding: 15px 30px;
+      .botao {
+        font-size: 16px;
+        padding: 12px 20px;
       }
-
       .icon {
         width: 30px;
-        height: 30px;
         top: -20px;
         right: -20px;
-      }
-
-      iframe {
-        height: 60vh;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="btn-container">
-    <button class="button" onclick="loadContent('audio.html', this)">
+  <div id="conteudo">
+    <iframe src="audio.html" id="iframeConteudo"></iframe>
+  </div>
+
+  <div class="botao-container">
+    <button class="botao" onclick="carregar('audio.html', 'borboleta')">
       Hinos
-      <img src="borboleta.png" class="icon" id="icon-hino" />
+      <img src="borboleta.png" class="icon" id="borboleta" />
     </button>
 
-    <button class="button" onclick="loadContent('mensagem.html', this)">
-      Mensagens
-      <img src="coroa.png" class="icon" id="icon-mensagem" />
+    <button class="botao" onclick="carregar('mensagem.html', 'coroa')">
+      Palavra
+      <img src="coroa.png" class="icon" id="coroa" />
     </button>
   </div>
 
-  <iframe id="content-frame" src="audio.html"></iframe>
-
   <script>
-    function loadContent(page, btn) {
-      document.getElementById('content-frame').src = page;
+    function carregar(pagina, elementoId) {
+      document.getElementById('iframeConteudo').src = pagina;
 
-      const icon = btn.querySelector('.icon');
-      icon.classList.remove('fly-away', 'pulse');
-
-      if (page === 'audio.html') {
-        icon.classList.add('fly-away');
-      } else if (page === 'mensagem.html') {
-        icon.classList.add('pulse');
+      const elemento = document.getElementById(elementoId);
+      if (elementoId === 'borboleta') {
+        elemento.classList.remove('voar');
+        void elemento.offsetWidth; // força reflow
+        elemento.classList.add('voar');
+      } else if (elementoId === 'coroa') {
+        elemento.classList.remove('ampliar');
+        void elemento.offsetWidth;
+        elemento.classList.add('ampliar');
       }
     }
   </script>
-
 </body>
 </html>
