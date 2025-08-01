@@ -1,208 +1,83 @@
-<!-- CÓDIGO MANTENDO TODA SUA ESTRUTURA E ESTILO -->
-<!-- SOM DIRETO NO INDEX - SEM IFRAME -->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Tocha do Altíssimo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tocha de Louvor</title>
   <style>
-    /* ... estilos mantidos exatamente como estavam ... */
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      background: url('imagem.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Dancing Script', cursive;
+    body {
+      background: linear-gradient(to bottom, #081c2e, #1a1a1a);
       color: gold;
+      font-family: 'Georgia', serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      overflow: hidden;
-      user-select: none;
-    }
-    #mensagem-container {
-      flex: 1;
-      display: flex;
       justify-content: center;
-      align-items: center;
-      max-width: 70vw;
-      margin: 20px auto 10px;
-      font-size: 1.5rem;
-      color: #ffd700;
-      text-shadow: 0 0 8px #b8860b, 0 0 15px #daa520;
-      min-height: 120px;
-      user-select: text;
+      height: 100vh;
+      margin: 0;
     }
-    #botoes {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 40px;
-      z-index: 1000;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
+
     button {
-      position: relative;
-      background: linear-gradient(135deg, #004aad, #2a75bb);
-      border: 3px solid gold;
-      border-radius: 15px;
-      padding: 14px 32px 14px 60px;
-      font-size: 1.3rem;
-      color: gold;
-      font-weight: 700;
+      background: gold;
+      border: none;
+      border-radius: 20px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #1a1a1a;
       cursor: pointer;
-      box-shadow: 0 0 18px rgba(255, 215, 0, 0.8);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      overflow: visible;
-      user-select: none;
+      box-shadow: 0 0 20px gold;
+      transition: 0.3s;
     }
+
     button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 30px rgba(255, 223, 77, 1);
+      background: #fff8dc;
+      box-shadow: 0 0 30px gold;
     }
-    .icon {
-      position: absolute;
-      top: -20px;
-      width: 48px;
-      height: 48px;
-      pointer-events: none;
-      user-select: none;
-      left: 10px;
-      z-index: 10;
-    }
-    #btnHinos .icon {
-      animation: pulseCrown 3s infinite ease-in-out;
-      transform-origin: center center;
-    }
-    #btnMensagens .icon {
-      animation: flyButterfly 4s infinite ease-in-out;
-      transform-origin: center center;
-    }
-    @keyframes pulseCrown {
-      0%, 100% { transform: scale(1) rotate(-15deg); opacity: 1; }
-      50% { transform: scale(1.3) rotate(-15deg); opacity: 0.7; }
-    }
-    @keyframes flyButterfly {
-      0%, 100% { transform: rotate(15deg); opacity: 1; }
-      50% { transform: rotate(-15deg); opacity: 0.6; }
+
+    #nomeHino {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-style: italic;
+      color: #ffd700;
     }
   </style>
 </head>
 <body>
 
-  <div id="mensagem-container">Carregando mensagem...</div>
+  <h1>🔥 Tocar um Hino Aleatório</h1>
+  <button id="btnHinos">🎵 Hinos</button>
+  <div id="nomeHino">Clique para ouvir um som celestial</div>
 
-  <div id="botoes">
-    <button id="btnHinos" title="Tocar Hino">
-      <img src="coroa.png" alt="Coroa" class="icon" />
-      Hinos
-    </button>
-    <button id="btnMensagens" title="Mensagem de Deus">
-      <img src="borboleta.png" alt="Borboleta" class="icon" />
-      Mensagem de Deus
-    </button>
-  </div>
-
-  <!-- IFRAME SOMENTE PARA MENSAGEM -->
-  <iframe id="iframeMensagem" src="mensagem.html" style="display:none;"></iframe>
-
-  <!-- ÁUDIO DIRETO NO INDEX -->
-  <audio id="audioHino" preload="auto">
-    <source src="audio1.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-  </audio>
+  <audio id="audioHino" preload="auto"></audio>
 
   <script>
-    const btnHinos = document.getElementById('btnHinos');
-    const btnMensagens = document.getElementById('btnMensagens');
-    const mensagemContainer = document.getElementById('mensagem-container');
-    const iframeMensagem = document.getElementById('iframeMensagem');
-    const audioElement = document.getElementById('audioHino');
+    const hinos = [
+      { nome: "Toque Celestial", arquivo: "audio1.mp3" },
+      { nome: "Chama da Promessa", arquivo: "audio2.mp3" },
+      { nome: "Marcha da Luz", arquivo: "audio3.mp3" },
+      { nome: "Sopro do Espírito", arquivo: "audio4.mp3" }
+    ];
 
-    let mensagemPronta = false;
+    const btn = document.getElementById('btnHinos');
+    const audio = document.getElementById('audioHino');
+    const nomeHino = document.getElementById('nomeHino');
 
-    // Ouve mensagens do iframe
-    window.addEventListener('message', event => {
-      if (event.source === iframeMensagem.contentWindow) {
-        if (event.data.type === 'mensagemPronta') {
-          mensagemPronta = true;
-          atualizarMensagem();
-        } else if (event.data.type === 'novaMensagemTexto') {
-          mensagemContainer.textContent = event.data.texto;
-        }
-      }
-    });
-
-    // Botão Mensagem
-    btnMensagens.addEventListener('click', () => {
-      if (mensagemPronta) {
-        iframeMensagem.contentWindow.postMessage({type: 'novaMensagem'}, '*');
-        animarBorboletas();
-      }
-    });
-
-    // Botão Hino
-    btnHinos.addEventListener('click', () => {
-      audioElement.play().catch(err => {
-        alert("⚠️ Clique para permitir o áudio.");
-        console.log(err);
+    btn.addEventListener('click', () => {
+      const aleatorio = hinos[Math.floor(Math.random() * hinos.length)];
+      audio.src = aleatorio.arquivo;
+      audio.play().catch(err => {
+        alert("⚠️ Toque permitido apenas com interação.");
+        console.error(err);
       });
-      animarCoroa();
+      nomeHino.textContent = `🎶 Tocando: "${aleatorio.nome}"`;
     });
-
-    // Animações visuais
-    const borboletasFly = document.createElement('div');
-    borboletasFly.id = 'borboletas-fly';
-    document.body.appendChild(borboletasFly);
-
-    function animarBorboletas() {
-      const total = 15;
-      for (let i = 0; i < total; i++) {
-        const b = document.createElement('div');
-        b.className = 'borboleta-fade';
-        b.style.position = 'fixed';
-        b.style.width = '36px';
-        b.style.height = '36px';
-        b.style.backgroundImage = "url('borboleta.png')";
-        b.style.backgroundSize = 'contain';
-        b.style.backgroundRepeat = 'no-repeat';
-        b.style.left = `${window.innerWidth / 2 + (Math.random() - 0.5)*100}px`;
-        b.style.top = `${window.innerHeight - 100 + (Math.random() - 0.5)*50}px`;
-        b.style.opacity = '1';
-        b.style.transition = 'transform 5s ease, opacity 5s ease';
-        borboletasFly.appendChild(b);
-        setTimeout(() => {
-          b.style.transform = `translate(${(Math.random()-0.5)*300}px, -${100 + Math.random()*300}px) rotate(${Math.random()*360}deg) scale(0.5)`;
-          b.style.opacity = '0';
-        }, 50);
-        setTimeout(() => {
-          borboletasFly.removeChild(b);
-        }, 5500);
-      }
-    }
-
-    function animarCoroa() {
-      const coroa = btnHinos.querySelector('.icon');
-      coroa.style.animation = 'pulseCrownLong 5s ease forwards';
-      setTimeout(() => {
-        coroa.style.animation = 'pulseCrown 3s infinite ease-in-out';
-      }, 5000);
-    }
-
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-      @keyframes pulseCrownLong {
-        0% { transform: scale(1) rotate(-15deg); opacity: 1; }
-        50% { transform: scale(1.5) rotate(-15deg); opacity: 0.7; }
-        100% { transform: scale(1) rotate(-15deg); opacity: 1; }
-      }
-    `;
-    document.head.appendChild(styleSheet);
   </script>
+
 </body>
 </html>
