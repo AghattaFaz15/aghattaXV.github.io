@@ -5,7 +5,7 @@
   <title>Áudio Aleatório de Deus</title>
 </head>
 <body style="margin:0; background: transparent;">
-  <audio id="audioHino" autoplay></audio>
+  <audio id="audioHino"></audio>
 
   <script>
     const hinos = [
@@ -20,26 +20,43 @@
     ];
 
     const audioElement = document.getElementById("audioHino");
+    let audioProntoEnviado = false;
 
-    // Aguarda o DOM carregar completamente
-    document.addEventListener('DOMContentLoaded', () => {
+    // Quando a página carregar, avisamos ao pai que o iframe está pronto
+    window.addEventListener('DOMContentLoaded', () => {
+      // Escolha aleatória do hino, mas não toca ainda
       const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
       audioElement.src = hinoAleatorio;
-
-      // Reproduz o áudio apenas após o carregamento
       audioElement.load();
-      audioElement.play().catch(err => {
-        console.log("Autoplay bloqueado. O áudio será iniciado ao clicar.");
-        // Exibe um botão para o usuário ativar o som, se necessário
-        const botao = document.createElement('button');
-        botao.textContent = "Ativar Som 🎵";
-        botao.style = "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2em; padding:10px 20px; border:none; border-radius:10px; background:#ffd700; color:#000; font-family:Georgia,serif; cursor:pointer;";
-        botao.onclick = () => {
-          audioElement.play();
-          botao.remove();
-        };
-        document.body.appendChild(botao);
-      });
+
+      // Avisar que o áudio está pronto para tocar
+      if (!audioProntoEnviado) {
+        window.parent.postMessage({ type: 'audioPronto' }, '*');
+        audioProntoEnviado = true;
+      }
+    });
+
+    // Ouvir mensagens do pai para tocar o áudio
+    window.addEventListener('message', event => {
+      if(event.data.type === 'tocarAudio') {
+        audioElement.play().catch(err => {
+          // Se autoplay for bloqueado, aguarda o clique do usuário
+          console.log('Autoplay bloqueado, aguardando interação do usuário.');
+
+          // Cria um botão para ativar o som manualmente
+          if (!document.getElementById('btnAtivarSom')) {
+            const botao = document.createElement('button');
+            botao.id = 'btnAtivarSom';
+            botao.textContent = "Ativar Som 🎵";
+            botao.style = "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2em; padding:10px 20px; border:none; border-radius:10px; background:#ffd700; color:#000; font-family:Georgia, serif; cursor:pointer; z-index:1000;";
+            botao.onclick = () => {
+              audioElement.play();
+              botao.remove();
+            };
+            document.body.appendChild(botao);
+          }
+        });
+      }
     });
   </script>
 </body>
