@@ -5,7 +5,7 @@
   <title>Áudio Aleatório de Deus</title>
 </head>
 <body style="margin:0; background: transparent;">
-  <audio id="audioHino"></audio>
+  <audio id="audioHino" preload="auto"></audio>
 
   <script>
     const hinos = [
@@ -20,43 +20,48 @@
     ];
 
     const audioElement = document.getElementById("audioHino");
-    let audioProntoEnviado = false;
 
-    // Quando a página carregar, avisamos ao pai que o iframe está pronto
-    window.addEventListener('DOMContentLoaded', () => {
-      // Escolha aleatória do hino, mas não toca ainda
+    document.addEventListener('DOMContentLoaded', () => {
       const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
       audioElement.src = hinoAleatorio;
+
       audioElement.load();
 
-      // Avisar que o áudio está pronto para tocar
-      if (!audioProntoEnviado) {
-        window.parent.postMessage({ type: 'audioPronto' }, '*');
-        audioProntoEnviado = true;
-      }
-    });
+      audioElement.play().catch(err => {
+        console.warn("Autoplay bloqueado ou áudio ainda não pronto:", err);
 
-    // Ouvir mensagens do pai para tocar o áudio
-    window.addEventListener('message', event => {
-      if(event.data.type === 'tocarAudio') {
-        audioElement.play().catch(err => {
-          // Se autoplay for bloqueado, aguarda o clique do usuário
-          console.log('Autoplay bloqueado, aguardando interação do usuário.');
+        const aviso = document.createElement('div');
+        aviso.innerHTML = `
+          <p style="color:white; font-family:Georgia; text-align:center; margin-top:20px;">
+            🔇 O som ainda não foi iniciado.<br>Clique abaixo para ouvir a melodia dos céus:
+          </p>
+        `;
 
-          // Cria um botão para ativar o som manualmente
-          if (!document.getElementById('btnAtivarSom')) {
-            const botao = document.createElement('button');
-            botao.id = 'btnAtivarSom';
-            botao.textContent = "Ativar Som 🎵";
-            botao.style = "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2em; padding:10px 20px; border:none; border-radius:10px; background:#ffd700; color:#000; font-family:Georgia, serif; cursor:pointer; z-index:1000;";
-            botao.onclick = () => {
-              audioElement.play();
-              botao.remove();
-            };
-            document.body.appendChild(botao);
-          }
-        });
-      }
+        const botao = document.createElement('button');
+        botao.textContent = "Ativar Som 🎵";
+        botao.style = `
+          display:block;
+          margin: 20px auto;
+          font-size:1.2em;
+          padding:10px 20px;
+          border:none;
+          border-radius:10px;
+          background:#ffd700;
+          color:#000;
+          font-family:Georgia,serif;
+          cursor:pointer;
+        `;
+
+        botao.onclick = () => {
+          audioElement.play().then(() => {
+            aviso.remove();
+            botao.remove();
+          });
+        };
+
+        document.body.appendChild(aviso);
+        document.body.appendChild(botao);
+      });
     });
   </script>
 </body>
