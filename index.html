@@ -1,6 +1,3 @@
-<!-- CÓDIGO MANTENDO TODA SUA ESTRUTURA E ESTILO -->
-<!-- SOM DIRETO NO INDEX - SEM IFRAME -->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
-    /* ... estilos mantidos exatamente como estavam ... */
     html, body {
       margin: 0; padding: 0; height: 100%;
       background: url('imagem.jpg') no-repeat center center fixed;
@@ -108,10 +104,6 @@
     </button>
   </div>
 
-  <!-- IFRAME SOMENTE PARA MENSAGEM -->
-  <iframe id="iframeMensagem" src="mensagem.html" style="display:none;"></iframe>
-
-  <!-- ÁUDIO DIRETO NO INDEX -->
   <audio id="audioHino" preload="auto">
     <source src="audio1.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
@@ -121,24 +113,41 @@
     const btnHinos = document.getElementById('btnHinos');
     const btnMensagens = document.getElementById('btnMensagens');
     const mensagemContainer = document.getElementById('mensagem-container');
-    const iframeMensagem = document.getElementById('iframeMensagem');
     const audioElement = document.getElementById('audioHino');
 
-    let mensagemPronta = false;
+    const audiosDisponiveis = [
+      'audio1.mp3', 'audio2.mp3', 'audio3.mp3', 'audio4.mp3',
+      'audio5.mp3', 'audio6.mp3', 'audio7.mp3', 'audio8.mp3',
+      'audio9.mp3', 'audio10.mp3', 'audio11.mp3', 'audio12.mp3'
+    ];
 
-    // Ouve mensagens do iframe
+    btnHinos.addEventListener('click', () => {
+      const escolhido = audiosDisponiveis[Math.floor(Math.random() * audiosDisponiveis.length)];
+      audioElement.src = escolhido;
+      audioElement.play().catch(err => {
+        console.warn("Não foi possível reproduzir o áudio automaticamente.");
+      });
+      animarCoroa();
+    });
+
+    let mensagemPronta = false;
+    const iframeMensagem = document.createElement('iframe');
+    iframeMensagem.id = 'iframeMensagem';
+    iframeMensagem.src = 'mensagem.html';
+    iframeMensagem.style.display = 'none';
+    document.body.appendChild(iframeMensagem);
+
     window.addEventListener('message', event => {
       if (event.source === iframeMensagem.contentWindow) {
         if (event.data.type === 'mensagemPronta') {
           mensagemPronta = true;
-          atualizarMensagem();
+          mensagemContainer.textContent = "Clique para receber uma nova mensagem!";
         } else if (event.data.type === 'novaMensagemTexto') {
           mensagemContainer.textContent = event.data.texto;
         }
       }
     });
 
-    // Botão Mensagem
     btnMensagens.addEventListener('click', () => {
       if (mensagemPronta) {
         iframeMensagem.contentWindow.postMessage({type: 'novaMensagem'}, '*');
@@ -146,43 +155,33 @@
       }
     });
 
-    // Botão Hino
-    btnHinos.addEventListener('click', () => {
-      audioElement.play().catch(err => {
-        alert(⚠️ Clique para permitir o áudio.");
-        console.log(err);
-      });
-      animarCoroa();
-    });
-
-    // Animações visuais
     const borboletasFly = document.createElement('div');
     borboletasFly.id = 'borboletas-fly';
     document.body.appendChild(borboletasFly);
 
     function animarBorboletas() {
-      const total = 15;
+      const total = 20;
       for (let i = 0; i < total; i++) {
         const b = document.createElement('div');
         b.className = 'borboleta-fade';
         b.style.position = 'fixed';
-        b.style.width = '36px';
-        b.style.height = '36px';
+        b.style.width = '64px';
+        b.style.height = '64px';
         b.style.backgroundImage = "url('borboleta.png')";
         b.style.backgroundSize = 'contain';
         b.style.backgroundRepeat = 'no-repeat';
-        b.style.left = `${window.innerWidth / 2 + (Math.random() - 0.5)*100}px`;
-        b.style.top = `${window.innerHeight - 100 + (Math.random() - 0.5)*50}px`;
+        b.style.left = `${window.innerWidth / 2 + (Math.random() - 0.5)*150}px`;
+        b.style.top = `${window.innerHeight - 120 + (Math.random() - 0.5)*80}px`;
         b.style.opacity = '1';
-        b.style.transition = 'transform 5s ease, opacity 5s ease';
+        b.style.transition = 'transform 6s ease, opacity 6s ease';
         borboletasFly.appendChild(b);
         setTimeout(() => {
-          b.style.transform = `translate(${(Math.random()-0.5)*300}px, -${100 + Math.random()*300}px) rotate(${Math.random()*360}deg) scale(0.5)`;
+          b.style.transform = `translate(${(Math.random()-0.5)*400}px, -${150 + Math.random()*400}px) rotate(${Math.random()*360}deg) scale(1.2)`;
           b.style.opacity = '0';
         }, 50);
         setTimeout(() => {
           borboletasFly.removeChild(b);
-        }, 5500);
+        }, 6000);
       }
     }
 
