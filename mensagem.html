@@ -4,26 +4,67 @@
   <meta charset="UTF-8" />
   <title>Mensagens de Deus</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather&display=swap');
+
     body {
       margin: 0; padding: 0;
-      font-family: 'Georgia', serif;
+      font-family: 'Merriweather', serif;
       background: transparent;
       color: #ffd700;
       display: flex; justify-content: center; align-items: center;
       height: 100vh; user-select: none;
       text-align: center;
       padding: 20px;
+      flex-direction: column;
+      background: linear-gradient(135deg, #001f3f 0%, #004080 100%);
     }
 
     #mensagem {
       max-width: 800px;
-      font-size: 1.6rem;
-      line-height: 1.8;
+      font-size: 1.8rem;
+      line-height: 1.9;
+      margin-bottom: 30px;
+      min-height: 140px;
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      color: #ffeb3b;
+      text-shadow:
+        0 0 5px #fff176,
+        0 0 10px #fdd835,
+        0 0 15px #fbc02d,
+        0 0 20px #f9a825,
+        0 0 30px #f57f17;
+      transition: opacity 0.6s ease;
+      padding: 0 15px;
+    }
+
+    button {
+      font-family: 'Merriweather', serif;
+      background: gold;
+      color: #003366;
+      font-weight: bold;
+      font-size: 1.3rem;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 14px gold;
+      user-select: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      letter-spacing: 0.05em;
+    }
+    button:hover {
+      background-color: #ffd633;
+      transform: scale(1.05);
+    }
+    button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
   <div id="mensagem">Aperte o botão para receber sua mensagem celestial...</div>
+  <button id="btnMensagem">Receber Mensagem</button>
 
   <script>
     const mensagens = [
@@ -197,63 +238,79 @@
       "Quando a dúvida te rondar, volta-te para Mim e escuta Meu sussurro de confiança.",
       "Eu sou o caminho que nunca falha, a verdade que liberta e a vida que nunca termina.",
       "Não carregues fardos sozinhos; lança sobre Mim todas as tuas preocupações e serei teu descanso.",
-      "Cada batalha que enfrentaste já está ganha no Meu reino, só te peço perseverança.",
-      "Minha fidelidade é escudo que não falha, mesmo quando o mundo te volta as costas.",
-      "Teu sorriso será a luz que refletirá Minha glória no meio da escuridão.",
-      "Eu te chamei para algo maior que tuas dúvidas e medos; caminha comigo e verás.",
-      "Não olhes para teus limites, pois Eu sou o Deus do impossível, que opera além da razão.",
-      "Minha palavra é lâmpada para teus pés e luz para o teu caminho nos momentos de incerteza.",
-      "Eu renovo teu espírito, mesmo quando tua alma parece cansada e o coração ferido.",
-      "Sê firme, porque Eu sou a Rocha eterna que nunca se abala.",
-      "Teus sonhos são sementes que Eu plantei em ti; cultiva-os com fé e paciência.",
-      "Eu te levanto em meio à tempestade, como o sol que rompe a escuridão da madrugada.",
-      "Não temas as montanhas; Eu sou o Senhor que a move e abre passagem para ti.",
-      "Meu amor não tem limites, não conhece distância; Ele te alcança onde estiveres.",
-      "Eu sou o Deus que sara, restaura e transforma o deserto em jardim florescente.",
-      "Em meio ao silêncio, Eu canto canções de libertação sobre tua vida.",
-      "Cada dia é uma página em branco que Eu escrevo com esperança e redenção para ti.",
-      "Minha presença é o refrigério para teu espírito cansado e inquieto.",
-      "Eu sou a tua fortaleza, teu refúgio seguro contra os ventos da adversidade.",
-      "Não te entregues à desesperança; Eu sou a fonte inesgotável de vida e alegria.",
-      "Eu te conduzo em caminhos retos para a honra do Meu nome e tua paz.",
-      "Meu amor é um oceano onde podes mergulhar sem medo e nunca te afogar.",
-      "Eu te capacito para vencer as batalhas espirituais que o inimigo levanta contra ti.",
-      "Não temas, porque Eu sou o Deus do impossível, que opera milagres para os que crêem.",
-      "Eu te abençoo com sabedoria, discernimento e força para o tempo certo.",
-      "Cada desafio é uma oportunidade para testemunhar Minha glória em tua vida.",
-      "Minha palavra é viva e eficaz, mais cortante que espada de dois gumes, para transformar-te.",
-      "Eu te chamo para a liberdade verdadeira, que só o Meu amor pode dar.",
-      "Não olhes para o passado com vergonha, mas com gratidão pela Minha graça que te resgatou.",
-      "Eu sou o Deus que faz todas as coisas novas e te chama para recomeçar hoje mesmo.",
-      "Meu Espírito Santo habita em ti, guiando teus passos com luz e verdade.",
-      "Mesmo nas sombras da dúvida, Eu sou a certeza que sustenta o teu ser.",
-      "Eu sou o Deus que nunca se cansa de te amar e renovar tuas forças.",
-      "Levanta-te com fé, porque Eu estou contigo todos os dias, até a consumação dos séculos.",
-      "Tu és obra-prima das minhas mãos, criado para refletir a minha glória eterna.",
-      "Eu te dou a paz que o mundo não pode dar; ela guardará teu coração e tua mente.",
-      "Quando a tempestade vier, lembra-te: Eu sou a âncora que não falha, o refúgio seguro.",
-      "Confia em Mim, pois Eu sou o Deus fiel que cumpre todas as minhas promessas.",
-      "Eu te amo com amor eterno, e nada poderá separar-te do Meu cuidado.",
-      "Em teus momentos de fraqueza, Eu sou tua força renovada e esperança viva.",
-      "Cada dia contigo é um presente divino, uma nova chance para a vitória e alegria.",
-      "Eu sou o Deus que te chama para caminhar em liberdade, amor e plenitude.",
-      "Não temas, filho amado, porque Eu estou contigo, hoje e para sempre."
+      "Cada batalha que enfrentaste já está ganha no Meu reino, pois Eu pelejo por ti.",
+      "Eu sou o Deus que renova a tua mente e transforma teu coração de pedra em carne viva.",
+      "Em teus momentos de silêncio, Eu canto canções de amor e esperança para tua alma.",
+      "Nunca te deixarei; Minha fidelidade é o alicerce firme onde podes construir teus sonhos.",
+      "Eu sou o Deus que faz novas todas as coisas; recomeça comigo hoje, filho amado.",
+      "Tua luz brilhará nas trevas; não temas, pois Eu sou tua luz eterna e salvação.",
+      "Eu te guardo sob as asas do Meu amor; segura-te e não temas o amanhã.",
+      "Cada dia é uma nova página no livro que Eu escrevo contigo; viva-o com fé e alegria.",
+      "Eu sou a âncora firme que segura teu coração quando as ondas da vida ameaçam te derrubar.",
+      "Confia em Mim, mesmo quando tudo parecer perdido; Eu sou o Deus do impossível e da esperança.",
+      "Eu te amo com um amor eterno, que não conhece fim nem medida.",
+      "Mesmo nos desertos da vida, Eu sou a fonte que nunca seca, a água viva que sacia tua sede.",
+      "Quando sentires fraco, lembra que Minha graça te basta e Meu poder se aperfeiçoa na tua fraqueza.",
+      "Eu sou o Deus que levanta os caídos e fortalece os cansados; vem a Mim e descansa.",
+      "Tua vida é preciosa e cheia de propósito; Eu sou o autor dessa história de vitória.",
+      "Não temas o futuro, pois Eu sou o Senhor dos dias e guardo teus passos com amor infinito.",
+      "Eu sou o Deus que renova a esperança e faz do teu coração um jardim florido.",
+      "Levanta os olhos para o alto e vê: Eu estou contigo todos os dias até a consumação dos tempos.",
+      "Eu sou o Deus que conhece teus medos e transforma-os em coragem e fé inabalável.",
+      "Mesmo nas noites mais escuras, Eu sou a estrela que ilumina o teu caminho.",
+      "Minha paz guardará teu coração e mente, mesmo no meio das tempestades mais ferozes.",
+      "Eu sou o Deus que cura feridas e restaura vidas; vem a Mim com confiança e fé.",
+      "Não estás só; Eu sou o amigo fiel que nunca te abandona, mesmo quando te sentes perdido.",
+      "Eu sou o Deus que faz novas todas as coisas; deixa-Me transformar tua vida hoje.",
+      "Cada lágrima tua é preciosa para Mim e será transformada em júbilo e vitória.",
+      "Eu te chamei pelo nome e te amo com um amor que não tem fim.",
+      "Confia em Mim, pois Eu sou o Deus que nunca falha nem abandona os seus.",
+      "Eu sou a fonte de toda vida, paz e esperança; bebe de Mim e serás saciado.",
+      "Nos momentos de dor, Eu sou o conforto que embala tua alma e traz paz ao teu coração.",
+      "Eu sou o Deus que te fortalece e renova as forças; não temas, pois Eu estou contigo.",
+      "Tu és a luz do mundo que Eu coloquei para brilhar na escuridão.",
+      "Minha graça é suficiente para ti, e Meu poder se aperfeiçoa na tua fraqueza.",
+      "Eu sou o Deus que faz maravilhas e abre portas que ninguém pode fechar.",
+      "Não temas, pois Eu sou o teu Deus; Eu te tomo pela mão e te conduzo pelo caminho da vida.",
+      "Eu sou o Deus que transforma lágrimas em sorrisos e tristeza em alegria.",
+      "Confia em Mim, filho amado, pois Eu sou a tua força e salvação.",
+      "Eu sou o Deus que te ama com amor eterno e fiel, desde o princípio até o fim.",
+      "Mesmo quando te sentires perdido, Eu sou o caminho que te leva de volta ao lar.",
+      "Eu sou o Deus que faz novas todas as coisas; vem e recebe a vida abundante que Eu ofereço.",
+      "Cada dia contigo é um presente, e Eu desejo que vivas em plenitude e paz.",
+      "Eu sou o Deus que guarda teus passos e te sustenta com a mão da minha fidelidade.",
+      "Não temas as tempestades da vida, pois Eu sou o teu abrigo seguro e refúgio.",
+      "Eu sou o Deus que renova a esperança e acende a chama da fé em teu coração.",
+      "Levanta os olhos e vê a glória do Senhor que brilha sobre ti e te sustenta.",
+      "Eu sou o Deus que te chama para viver em vitória e liberdade, não em medo e tristeza.",
+      "Confia em Mim e Eu farei novas todas as coisas em tua vida hoje e sempre.",
+      "Eu sou o Deus que transforma o impossível em possível e o deserto em jardim.",
+      "Não desanimes, pois Eu sou o Deus que nunca abandona os seus filhos.",
+      "Eu sou o Deus que te ama incondicionalmente e te chama pelo nome com ternura.",
+      "Mesmo quando tudo parecer perdido, Eu sou a esperança viva que nunca se apaga.",
+      "Eu sou o Deus que cura, restaura e faz novas todas as coisas; vem a Mim, filho amado."
     ];
 
     let ultimaMensagemIndex = -1;
 
-    window.addEventListener('message', event => {
-      if (event.data.type === 'novaMensagem') {
-        let idx;
-        do {
-          idx = Math.floor(Math.random() * mensagens.length);
-        } while (idx === ultimaMensagemIndex);
-        ultimaMensagemIndex = idx;
-        const texto = mensagens[idx];
-        document.getElementById('mensagem').textContent = texto;
-        window.parent.postMessage({type: 'novaMensagemTexto', texto}, '*');
-      }
-    });
+    function mostrarMensagem() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * mensagens.length);
+      } while (idx === ultimaMensagemIndex);
+      ultimaMensagemIndex = idx;
+
+      const texto = mensagens[idx];
+      const mensagemDiv = document.getElementById('mensagem');
+
+      mensagemDiv.style.opacity = 0;
+      setTimeout(() => {
+        mensagemDiv.textContent = texto;
+        mensagemDiv.style.opacity = 1;
+      }, 400);
+    }
+
+    document.getElementById('btnMensagem').addEventListener('click', mostrarMensagem);
   </script>
 </body>
 </html>
