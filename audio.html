@@ -1,39 +1,46 @@
-<audio id="audioHino" autoplay></audio>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Áudio Aleatório de Deus</title>
+</head>
+<body style="margin:0; background: transparent;">
+  <audio id="audioHino" autoplay></audio>
 
-<script>
-  const hinos = [
-    'hinos/audio1.mp3',
-    'hinos/audio2.mp3',
-    'hinos/audio3.mp3',
-    'hinos/audio4.mp3',
-    'hinos/audio5.mp3',
-    'hinos/audio6.mp3',
-    'hinos/audio7.mp3',
-    'hinos/audio8.mp3'
-  ];
+  <script>
+    const hinos = [
+      'audio1.mp3',
+      'audio2.mp3',
+      'audio3.mp3',
+      'audio4.mp3',
+      'audio5.mp3',
+      'audio6.mp3',
+      'audio7.mp3',
+      'audio8.mp3'
+    ];
 
-  const audioElement = document.getElementById("audioHino");
+    const audioElement = document.getElementById("audioHino");
 
-  // Função para tocar áudio aleatório
-  function tocarAudioAleatorio() {
-    const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
-    audioElement.src = hinoAleatorio;
-    audioElement.play().catch(err => {
-      // Caso o navegador impeça autoplay
-      window.parent.postMessage({type: 'erroAudio'}, '*');
+    // Aguarda o DOM carregar completamente
+    document.addEventListener('DOMContentLoaded', () => {
+      const hinoAleatorio = hinos[Math.floor(Math.random() * hinos.length)];
+      audioElement.src = hinoAleatorio;
+
+      // Reproduz o áudio apenas após o carregamento
+      audioElement.load();
+      audioElement.play().catch(err => {
+        console.log("Autoplay bloqueado. O áudio será iniciado ao clicar.");
+        // Exibe um botão para o usuário ativar o som, se necessário
+        const botao = document.createElement('button');
+        botao.textContent = "Ativar Som 🎵";
+        botao.style = "position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2em; padding:10px 20px; border:none; border-radius:10px; background:#ffd700; color:#000; font-family:Georgia,serif; cursor:pointer;";
+        botao.onclick = () => {
+          audioElement.play();
+          botao.remove();
+        };
+        document.body.appendChild(botao);
+      });
     });
-  }
-
-  // Tocar na inicialização, se desejar:
-  // tocarAudioAleatorio();
-
-  // Avisar que o audio está pronto para receber comandos
-  window.parent.postMessage({type: 'audioPronto'}, '*');
-
-  // Escutar mensagens do index.html para tocar áudio
-  window.addEventListener('message', event => {
-    if(event.data.type === 'tocarAudio') {
-      tocarAudioAleatorio();
-    }
-  });
-</script>
+  </script>
+</body>
+</html>
