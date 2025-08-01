@@ -1,3 +1,6 @@
+<!-- CÓDIGO MANTENDO TODA SUA ESTRUTURA E ESTILO -->
+<!-- SOM DIRETO NO INDEX - SEM IFRAME -->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
   <style>
-    /* ... seu estilo lindo conforme antes ... */
+    /* ... estilos mantidos exatamente como estavam ... */
     html, body {
       margin: 0; padding: 0; height: 100%;
       background: url('imagem.jpg') no-repeat center center fixed;
@@ -105,64 +108,54 @@
     </button>
   </div>
 
-  <!-- iframes invisíveis para áudio e mensagens -->
+  <!-- IFRAME SOMENTE PARA MENSAGEM -->
   <iframe id="iframeMensagem" src="mensagem.html" style="display:none;"></iframe>
-  <iframe id="iframeAudio" src="audio.html" style="display:none;"></iframe>
+
+  <!-- ÁUDIO DIRETO NO INDEX -->
+  <audio id="audioHino" preload="auto">
+    <source src="audio1.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
 
   <script>
     const btnHinos = document.getElementById('btnHinos');
     const btnMensagens = document.getElementById('btnMensagens');
     const mensagemContainer = document.getElementById('mensagem-container');
     const iframeMensagem = document.getElementById('iframeMensagem');
-    const iframeAudio = document.getElementById('iframeAudio');
+    const audioElement = document.getElementById('audioHino');
 
-    // Flag para garantir iframe pronto
     let mensagemPronta = false;
-    let audioPronto = false;
 
-    // Aviso que iframe mensagem está pronto para enviar mensagem
+    // Ouve mensagens do iframe
     window.addEventListener('message', event => {
-      if(event.source === iframeMensagem.contentWindow) {
-        if(event.data.type === 'mensagemPronta') {
+      if (event.source === iframeMensagem.contentWindow) {
+        if (event.data.type === 'mensagemPronta') {
           mensagemPronta = true;
           atualizarMensagem();
+        } else if (event.data.type === 'novaMensagemTexto') {
+          mensagemContainer.textContent = event.data.texto;
         }
-      }
-      if(event.source === iframeAudio.contentWindow) {
-        if(event.data.type === 'audioPronto') {
-          audioPronto = true;
-        }
-      }
-      if(event.data.type === 'novaMensagemTexto') {
-        // Recebe texto da mensagem do iframe mensagem.html para exibir no container
-        mensagemContainer.textContent = event.data.texto;
       }
     });
 
-    // Função para pedir nova mensagem para iframe mensagem.html
-    function atualizarMensagem() {
-      if(mensagemPronta) {
-        iframeMensagem.contentWindow.postMessage({type:'novaMensagem'}, '*');
-      }
-    }
-
-    // Botão Mensagens — solicita nova mensagem
+    // Botão Mensagem
     btnMensagens.addEventListener('click', () => {
-      atualizarMensagem();
-      animarBorboletas();
-    });
-
-    // Botão Hinos — manda mensagem para iframe audio tocar som
-    btnHinos.addEventListener('click', () => {
-      if(audioPronto) {
-        iframeAudio.contentWindow.postMessage({type:'tocarAudio'}, '*');
-        animarCoroa();
-      } else {
-        alert('O áudio ainda não está pronto, tente novamente.');
+      if (mensagemPronta) {
+        iframeMensagem.contentWindow.postMessage({type: 'novaMensagem'}, '*');
+        animarBorboletas();
       }
     });
 
-    // Animações das borboletas
+    // Botão Hino
+    btnHinos.addEventListener('click', () => {
+      audioElement.play().catch(err => {
+        alert("⚠️ Clique para permitir o áudio.");
+        console.log(err);
+      });
+      animarCoroa();
+    });
+
+    // Animações visuais
     const borboletasFly = document.createElement('div');
     borboletasFly.id = 'borboletas-fly';
     document.body.appendChild(borboletasFly);
@@ -183,20 +176,16 @@
         b.style.opacity = '1';
         b.style.transition = 'transform 5s ease, opacity 5s ease';
         borboletasFly.appendChild(b);
-
-        // Movimento aleatório
         setTimeout(() => {
           b.style.transform = `translate(${(Math.random()-0.5)*300}px, -${100 + Math.random()*300}px) rotate(${Math.random()*360}deg) scale(0.5)`;
           b.style.opacity = '0';
         }, 50);
-
         setTimeout(() => {
           borboletasFly.removeChild(b);
         }, 5500);
       }
     }
 
-    // Animação da coroa
     function animarCoroa() {
       const coroa = btnHinos.querySelector('.icon');
       coroa.style.animation = 'pulseCrownLong 5s ease forwards';
@@ -205,7 +194,6 @@
       }, 5000);
     }
 
-    // Animações longas adicionais
     const styleSheet = document.createElement('style');
     styleSheet.textContent = `
       @keyframes pulseCrownLong {
